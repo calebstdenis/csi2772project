@@ -210,3 +210,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/JeuDeCartes/JeuDeCartes.VC.db
+/JeuDeCartes/JeuDeCartes.VC.VC.opendb
