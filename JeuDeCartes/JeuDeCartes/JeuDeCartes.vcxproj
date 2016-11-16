@@ -20,12 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardFactory.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="Coins.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="Hand.h" />
-    <ClInclude Include="Players.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="TradeArea.h" />
   </ItemGroup>
