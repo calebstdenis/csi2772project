@@ -15,7 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="notreProjet.h">
+    <ClInclude Include="Card.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscardPile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TradeArea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Coins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Players.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

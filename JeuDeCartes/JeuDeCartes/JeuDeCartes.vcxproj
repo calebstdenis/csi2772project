@@ -18,6 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="Chain.h" />
+    <ClInclude Include="Coins.h" />
+    <ClInclude Include="Deck.h" />
+    <ClInclude Include="DiscardPile.h" />
+    <ClInclude Include="Hand.h" />
+    <ClInclude Include="Players.h" />
+    <ClInclude Include="Table.h" />
+    <ClInclude Include="TradeArea.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B46C4B28-AF71-4D0E-9C67-40F69CD6C83F}</ProjectGuid>
     <RootNamespace>JeuDeCartes</RootNamespace>
@@ -109,9 +120,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="notreProjet.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
