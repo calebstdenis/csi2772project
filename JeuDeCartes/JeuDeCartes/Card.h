@@ -3,10 +3,9 @@
 #include <string>
 
 class Card {
-	static std::string name;
 public:
 	virtual int getCardsPerPoint(int);
-	virtual std::string getName() { return name; };
+	virtual std::string getName();
 };
 
 class Quartz : public Card {};

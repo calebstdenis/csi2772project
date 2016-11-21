@@ -4,7 +4,7 @@
 class Hand
 {
 public:
-	Hand(const istream&, CardFactory*);
+	Hand(const std::istream&, CardFactory*);
 	Hand& operator+=(Card*);
 	Card* play();
 	Card* top();

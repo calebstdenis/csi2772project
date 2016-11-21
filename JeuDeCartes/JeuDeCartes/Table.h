@@ -5,7 +5,7 @@
 
 class Table
 {
-	Players p1, p2;
+	Player p1, p2;
 	Deck deck;
 	DiscardPile discardPile;
 	TradeArea tradeArea;
