@@ -1,5 +1,7 @@
-#include "Card.h"
-#include "CardFactory.h"
+#include <iostream>
+
+class Card;
+class CardFactory;
 
 class Hand
 {

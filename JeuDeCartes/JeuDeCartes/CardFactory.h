@@ -1,4 +1,4 @@
-#include "Deck.h"
+class Deck;
 
 class CardFactory
 {
