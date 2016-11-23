@@ -5,13 +5,13 @@
 
 class Table
 {
-	Players p1, p2;
+	Player p1, p2;
 	Deck deck;
 	DiscardPile discardPile;
 	TradeArea tradeArea;
 public:
 	Table();//voir dans le document pour le constructeur
-	bool win(std::String);
+	bool win(std::string);
 	void printHand(bool);
 
 	void operator<< (int);
