@@ -1,10 +1,12 @@
-#include "Card.h"
-#include "CardFactory.h"
+#include <iostream>
+
+class Card;
+class CardFactory;
 
 class Hand
 {
 public:
-	Hand(const istream&, CardFactory*);
+	Hand(const std::istream&, CardFactory*);
 	Hand& operator+=(Card*);
 	Card* play();
 	Card* top();

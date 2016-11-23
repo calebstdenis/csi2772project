@@ -1,22 +1,35 @@
 #ifndef CARD_H
 #define CARD_H
 #include <string>
+#
+using namespace std;
 
-class Card {
-	static std::string name;
-public:
-	virtual int getCardsPerPoint(int);
-	virtual std::string getName() { return name; };
+struct Card {
+	virtual int getCardsPerCoin(int) const = 0;
+	virtual string getName() const = 0;
 };
 
-class Quartz : public Card {};
-class Hermatite : public Card {};
+class Quartz : Card { 
+	int cardsPerCoin[4];
+public: 
+	Quartz();
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
+class Hematite : Card {
+	int cardsPerCoin[4];
+public:
+	Hematite();
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
 class Obsidian : public Card {};
 class Malachite : public Card {};
 class Turquoise : public Card {};
 class Ruby : public Card {};
 class Amethyst : public Card {};
 class Emerald : public Card {};
+
 
 /* 
 std::string Quartz::name = "Quartz";
