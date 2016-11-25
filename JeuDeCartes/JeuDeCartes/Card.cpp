@@ -68,6 +68,7 @@ int Emerald::getCardsPerCoin(int numCoins) const {
 		string msg = "An emerald chain sells for more than " + to_string(numCoins) + " coins.";
 		throw invalid_argument(msg);
 	}
+	return val;
 }
 
 

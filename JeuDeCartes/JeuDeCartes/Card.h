@@ -49,14 +49,6 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Turquoise : Card {
-	static const string name;
-	static const int cardsPerCoin[4];
-public:
-	string getName() const override final;
-	int getCardsPerCoin(int) const override final;
-};
-
 class Amethyst : Card {
 	static const string name;
 	static const int cardsPerCoin[4];
