@@ -27,7 +27,7 @@ const int Malachite::cardsPerCoin[4] = { 3, 5, 6, 7 };
 const int Turquoise::cardsPerCoin[4] = { 2, 4, 6, 7 };
 const int Ruby::cardsPerCoin[4] = { 2, 4, 5, 6 };
 const int Amethyst::cardsPerCoin[4] = { 2, 3, 4, 5 };
-const int Emerald::cardsPerCoin[4] = { NULL, 6, 8, INT_MAX };
+const int Emerald::cardsPerCoin[4] = { NULL, 2, 3, INT_MAX };
 
 string Quartz::getName() const { return name; }
 string Hematite::getName() const { return name; }
@@ -51,6 +51,10 @@ int Obsidian::getCardsPerCoin(int numCoins) const {
 }
 
 int Malachite::getCardsPerCoin(int numCoins) const {
+	return ::getCardsPerCoin(numCoins, cardsPerCoin);
+}
+
+int Turquoise::getCardsPerCoin(int numCoins) const {
 	return ::getCardsPerCoin(numCoins, cardsPerCoin);
 }
 

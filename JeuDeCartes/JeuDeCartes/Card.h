@@ -9,7 +9,7 @@ public:
 	virtual string getName() const = 0;
 };
 
-class Quartz : Card { 
+class Quartz : public Card { 
 	static const string name;
 	static const int cardsPerCoin[4];
 public: 
@@ -17,7 +17,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Hematite : Card {
+class Hematite : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
@@ -25,7 +25,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Obsidian : Card {
+class Obsidian : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
@@ -33,7 +33,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Malachite : Card {
+class Malachite : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
@@ -41,7 +41,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Turquoise : Card {
+class Turquoise : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
@@ -49,7 +49,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Amethyst : Card {
+class Amethyst : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
@@ -57,7 +57,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Ruby : Card {
+class Ruby : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
@@ -65,7 +65,7 @@ public:
 	int getCardsPerCoin(int) const override final;
 };
 
-class Emerald : Card {
+class Emerald : public Card {
 	static const string name;
 	static const int cardsPerCoin[4];
 public:
