@@ -5,6 +5,10 @@ using namespace std;
 
 class Card {
 public: 
+	Card() = default;
+	Card(const Card&) = delete;
+	Card& operator=(const Card&) = delete;
+
 	virtual int getCardsPerCoin(int) const = 0;
 	virtual string getName() const = 0;
 };
