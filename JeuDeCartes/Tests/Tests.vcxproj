@@ -154,7 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CardFactoryTest.cpp" />
+    <ClCompile Include="DeckTest.cpp" />
     <ClCompile Include="CardTest.cpp" />
   </ItemGroup>
   <ItemGroup>

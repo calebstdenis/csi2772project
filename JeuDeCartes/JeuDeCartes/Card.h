@@ -5,7 +5,7 @@ using namespace std;
 
 class Card {
 public: 
-	Card() = default;
+	Card() = default; //no point in defining a destructor 
 	Card(const Card&) = delete;
 	Card& operator=(const Card&) = delete;
 

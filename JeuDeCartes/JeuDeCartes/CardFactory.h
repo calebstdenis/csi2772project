@@ -1,9 +1,9 @@
-class Deck;
+#include "Deck.h"
 
 class CardFactory
 {
 	static CardFactory *instance;
-	Deck &deck;
+	Deck deck;
 	CardFactory();//créer toutes les cartes dans les bonnes proportions
 public:
 	~CardFactory() = delete;
