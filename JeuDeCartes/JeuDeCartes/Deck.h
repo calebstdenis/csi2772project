@@ -1,6 +1,5 @@
 #ifndef DECK_H
 #define DECK_H
-#include <iostream>
 #include <vector>
 
 class CardFactory;
