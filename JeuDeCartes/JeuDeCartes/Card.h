@@ -14,65 +14,65 @@ public:
 };
 
 class Quartz : public Card { 
-	static const string name;
 	static const int cardsPerCoin[4];
 public: 
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Hematite : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Obsidian : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Malachite : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Turquoise : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Amethyst : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Ruby : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
 
 class Emerald : public Card {
-	static const string name;
 	static const int cardsPerCoin[4];
 public:
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
