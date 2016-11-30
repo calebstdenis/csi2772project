@@ -11,5 +11,5 @@ public:
 	bool legal(Card*);
 	Card* trade(std::string);
 	int numCards();
-	void operator<< (int);
+	friend std::ostream& operator<<(std::ostream&, const TradeArea &);
 };

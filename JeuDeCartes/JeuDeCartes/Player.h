@@ -15,5 +15,5 @@ public:
 	Chain & operator[] (int);
 	void buyThirdChain();
 	void printHand(std::ostream&, bool);
-	void operator<<(int);
+	friend std::ostream& operator<<(std::ostream&, const Player &);
 };
