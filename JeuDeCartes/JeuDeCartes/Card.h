@@ -1,44 +1,79 @@
 #ifndef CARD_H
 #define CARD_H
 #include <string>
-#
 using namespace std;
 
-struct Card {
+class Card {
+public: 
+	Card() = default; //no point in defining a destructor 
+	Card(const Card&) = delete;
+	Card& operator=(const Card&) = delete;
+
 	virtual int getCardsPerCoin(int) const = 0;
 	virtual string getName() const = 0;
 };
 
-class Quartz : Card { 
-	int cardsPerCoin[4];
+class Quartz : public Card { 
+	static const int cardsPerCoin[4];
 public: 
-	Quartz();
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
-class Hematite : Card {
-	int cardsPerCoin[4];
+
+class Hematite : public Card {
+	static const int cardsPerCoin[4];
 public:
-	Hematite();
+	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
 };
-class Obsidian : public Card {};
-class Malachite : public Card {};
-class Turquoise : public Card {};
-class Ruby : public Card {};
-class Amethyst : public Card {};
-class Emerald : public Card {};
 
+class Obsidian : public Card {
+	static const int cardsPerCoin[4];
+public:
+	static const string name;
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
 
-/* 
-std::string Quartz::name = "Quartz";
-std::string Quartz::name = "Hermatite";
-std::string Quartz::name = "Obsidian";
-std::string Quartz::name = "Malachite";
-std::string Quartz::name = "Turquoise";
-std::string Quartz::name = "Ruby";
-std::string Quartz::name = "Amethyst";
-std::string Quartz::name = "Emerald";
-*/
+class Malachite : public Card {
+	static const int cardsPerCoin[4];
+public:
+	static const string name;
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
+
+class Turquoise : public Card {
+	static const int cardsPerCoin[4];
+public:
+	static const string name;
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
+
+class Amethyst : public Card {
+	static const int cardsPerCoin[4];
+public:
+	static const string name;
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
+
+class Ruby : public Card {
+	static const int cardsPerCoin[4];
+public:
+	static const string name;
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
+
+class Emerald : public Card {
+	static const int cardsPerCoin[4];
+public:
+	static const string name;
+	string getName() const override final;
+	int getCardsPerCoin(int) const override final;
+};
 #endif
