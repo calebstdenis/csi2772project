@@ -1,7 +1,7 @@
 #include <exception>
 using namespace std;
 
-class IllegalTypeException 
+class IllegalType 
 {
 	virtual const char* what() const throw()
 	{

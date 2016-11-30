@@ -26,6 +26,7 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="illegalType.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="TradeArea.h" />
@@ -33,6 +34,7 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardFactory.cpp" />
+    <ClCompile Include="Chain.cpp" />
     <ClCompile Include="Deck.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
