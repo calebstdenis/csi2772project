@@ -25,6 +25,7 @@
     <ClInclude Include="Coins.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DiscardPile.h" />
+    <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="illegalType.h" />
     <ClInclude Include="Player.h" />
