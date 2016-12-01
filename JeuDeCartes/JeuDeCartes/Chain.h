@@ -10,5 +10,5 @@ public:
 	int sell();
 	Chain<T>& operator+=(Card*);
 	Chain<T>& operator+=(T*);//polymorphisme pour trouver les erreurs
-	friend std::ostream& operator<<(std::ostream&, const Chain&);
+	friend std::ostream& operator<<(std::ostream&, const Chain<T>&);
 };

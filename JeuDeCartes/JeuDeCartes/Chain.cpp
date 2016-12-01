@@ -35,11 +35,12 @@ Chain<T>& Chain<T>::operator+= (T* c)
 	return &this;
 }
 
-std::ostream& std::ostream::operator<< (std::ostream & os, const Chain & chaine)//je ne suis pas certain de l'implémentation mais je crois que c'est proche de ça
+std::ostream& operator<<(std::ostream & os, const Chain<T> & chaine)
 {
-	cout << T.getName() << " ";
+	os.write((char*)(T.name),T.name.size());
 	for (int i = 0; i < elements.size(); i++)
 	{
-		cout << &((char*)T.getName()) << " ";//la première lettre
+		os.put(*((char*)T.getName()));//la première lettre
 	}
+	return *this;
 }
