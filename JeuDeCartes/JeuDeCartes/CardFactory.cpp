@@ -8,16 +8,16 @@
 
 using namespace std;
 
-/* Add card pointers to the deck and multiset */
+/* Add card pointers to the deck and multimap */
 template <class C> void CardFactory::addCards(int n) {
 	for (int i = 0; i < n; i++) {
 		Card* c = new C;
 		deck.push_back(c);
-		cardSet.insert({ c->getName()[0], c });
+		cardMap.insert({ c->getName()[0], c });
 	}
 }
 
-CardFactory::CardFactory() : deck(Deck()), cardSet() {
+CardFactory::CardFactory() : deck(Deck()), cardMap() {
 	deck.reserve(numCardsInDeck);
 	addCards<Quartz>(20);
 	addCards<Hematite>(18);
@@ -48,12 +48,12 @@ Deck CardFactory::getDeck() {
  * The multimap allows us to quickly locate such a Card.
  * If no Cards are left in the multimap for a given character, then the save file is corrupt. */
 Card* CardFactory::initCard(char c) {
-	auto iterators = cardSet.equal_range(c); //iterators for the Cards corresponding to character "c"
+	auto iterators = cardMap.equal_range(c); //iterators for the Cards corresponding to character "c"
 	if (iterators.first == iterators.second) { //there are no more Cards of this type left to allocate
 		throw corrupt_game_file();
 	}
 	Card *card = iterators.first->second; //get a card of this type
-	cardSet.erase(iterators.first); //remove the card from the set
+	cardMap.erase(iterators.first); //remove the card from the set
 	return card;
 }
 
