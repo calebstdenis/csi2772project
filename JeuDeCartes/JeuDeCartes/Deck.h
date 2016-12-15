@@ -6,7 +6,7 @@ class Card;
 class CardFactory;
 
 //Derivation is private to prevent insertion of Cards. Useful members are made public with "using" however.
-class Deck : private std::vector<Card*> {
+class Deck : protected std::vector<Card*> {
 	friend class CardFactory;
 	Deck(); //no point in defining a destructor as Deck does not maintain any special state on the Heap. Vector does not have a virtual desctructor besides.
 	

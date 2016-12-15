@@ -24,11 +24,12 @@ namespace Tests
 			vector<Card*> quartz, emerald;
 
 			auto deck = cf->getDeck();
-			std::unique(deck.begin(), deck.end()); //ensure there are no duplicates
+			std::sort(deck.begin(), deck.end());
+			auto uniqueElems = std::unique(deck.begin(), deck.end()); //ensure there are no duplicates
 
 			//get all quartz and emerald cards
-			std::copy_if(deck.begin(), deck.end(), std::back_inserter(quartz), [](Card* c) { return c->getName() == "Quartz"; });
-			std::copy_if(deck.begin(), deck.end(), std::back_inserter(emerald), [](Card* c) { return c->getName() == "Emerald"; });
+			std::copy_if(deck.begin(), uniqueElems, std::back_inserter(quartz), [](Card* c) { return c->getName() == "Quartz"; });
+			std::copy_if(deck.begin(), uniqueElems, std::back_inserter(emerald), [](Card* c) { return c->getName() == "Emerald"; });
 
 			Assert::AreEqual(CARDS_IN_DECK, deck.size());
 			Assert::AreEqual(QUARTZ_CARDS_IN_DECK, quartz.size());
@@ -63,7 +64,7 @@ namespace Tests
 			Assert::IsTrue(decksAreSame);
 		}
 
-		TEST_METHOD(LoadDeck_CorruptedSave) {
+		TEST_METHOD(LoadDeck_CorruptedSaveExtraCard) {
 			auto *cf = CardFactory::getFactory();
 			stringstream s;
 			auto deck1 = cf->getDeck();
@@ -73,7 +74,22 @@ namespace Tests
 			s << 'Q'; //corrupt the save with an extra Quartz card
 			s.seekg(0); //move back to start
 			
-			auto constructFromFile = [&s,cf] { Deck(s, cf); };
+			auto constructFromFile = [&] { Deck(s, cf); };
+
+			Assert::ExpectException<corrupt_game_file>(constructFromFile);
+		}
+
+		TEST_METHOD(LoadDeck_CorruptedSaveInvalidInput) {
+			auto *cf = CardFactory::getFactory();
+			stringstream s;
+			auto deck1 = cf->getDeck();
+
+			s << deck1;
+			s.seekp(0);
+			s << '1'; //corrupt the save with a number
+			s.seekg(0); //move back to start
+
+			auto constructFromFile = [&] { Deck(s, cf); };
 
 			Assert::ExpectException<corrupt_game_file>(constructFromFile);
 		}
