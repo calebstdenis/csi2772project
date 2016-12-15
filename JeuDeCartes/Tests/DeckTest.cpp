@@ -46,20 +46,7 @@ namespace Tests
 			Assert::IsFalse(decksAreSame);
 		}
 
-		TEST_METHOD(LoadSavedDeck_FullDeck) {
-			auto *cf = CardFactory::getFactory();
-			stringstream s;
-			auto deck1 = cf->getDeck();
-
-			s << deck1;
-			s.seekg(0);
-			Deck deck2(s, cf);
-
-			bool decksAreSame = std::equal(deck1.begin(), deck1.end(), deck2.begin(), [](Card* c, Card* d) { return c->getName() == d->getName(); });
-			Assert::IsTrue(decksAreSame);
-		}
-
-		TEST_METHOD(LoadSavedDeck_NotFullDeck) {
+		TEST_METHOD(LoadSavedDeck) {
 			auto *cf = CardFactory::getFactory();
 			stringstream s;
 			auto deck1 = cf->getDeck();
