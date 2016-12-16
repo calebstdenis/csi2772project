@@ -39,6 +39,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DiscardPile.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="TradeArea.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B46C4B28-AF71-4D0E-9C67-40F69CD6C83F}</ProjectGuid>

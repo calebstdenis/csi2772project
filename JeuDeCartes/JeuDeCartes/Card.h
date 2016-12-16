@@ -9,9 +9,15 @@ public:
 	Card(const Card&) = delete;
 	Card& operator=(const Card&) = delete;
 
+	//here we chose against overloading == to avoid confusing semantics. Cards should only be equal if they are the exact same card, not two cards of the same type. 
+	bool isSameTypeAs(Card* card) { return this->getName() == card->getName();  }
+	
 	virtual int getCardsPerCoin(int) const = 0;
 	virtual string getName() const = 0;
 };
+
+inline char encodeCard(Card *c) { return c->getName()[0]; }
+//codifies Cards (as the first character of its gemstone name). Intended for use with standard algorithms.
 
 class Quartz : public Card { 
 	static const int cardsPerCoin[4];

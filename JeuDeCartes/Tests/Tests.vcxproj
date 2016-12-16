@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="DeckTest.cpp" />
     <ClCompile Include="CardTest.cpp" />
+    <ClCompile Include="TradeAreaTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JeuDeCartes\JeuDeCartes.vcxproj">
