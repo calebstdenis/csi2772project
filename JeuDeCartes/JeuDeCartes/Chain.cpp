@@ -25,13 +25,12 @@ int Chain<T>::sell()
 
 Chain<T>& Chain<T>::operator+= (Card* c)
 {
-	throw illegalType;
-	return &this;
-}
-
-Chain<T>& Chain<T>::operator+= (T* c)
-{
-	elements.pushBack(c);
+	if (c->getName() == T.getName())
+	{
+		elements.pushBack((T*)c);
+	}
+	else
+		throw illegalType;
 	return &this;
 }
 

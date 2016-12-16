@@ -22,6 +22,14 @@ Card* Hand::top()
 Card* Hand::operator[] (const int i)
 {
 	Card* c = main[i];
-	
+	//je ne crois pas qu'il y a une meilleur façon de faire ça
+	int size = main.size();//la taille vas changer lorsqu'on enleve l'indice donc on stoque la bone valeur dans un int temporaire
+	for (int j = 0; j < size; j++)
+	{
+		if (j == i)
+			main.pop_front();
+		else
+			main.push_back(play());
+	}
 	return c;
 }
