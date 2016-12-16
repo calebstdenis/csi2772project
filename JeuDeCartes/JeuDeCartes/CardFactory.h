@@ -27,5 +27,7 @@ public:
 
 	Card* loadCard(char); //Retrieves a card in the deck corresponding to the character - used to build from save file
 
+	void resetUnloadedCards(); //required for testing purposes
+
 	static constexpr int numCardsInDeck = 104;
 };

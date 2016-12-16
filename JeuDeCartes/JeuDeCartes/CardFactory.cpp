@@ -57,4 +57,10 @@ Card* CardFactory::loadCard(char c) {
 	return card;
 }
 
+void CardFactory::resetUnloadedCards() {
+	unloadedCards.clear();
+	for each (Card* c in deck) {
+		unloadedCards.insert({ c->getName()[0], c });
+	}
+}
 

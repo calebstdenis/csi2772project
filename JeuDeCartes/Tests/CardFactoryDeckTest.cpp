@@ -69,9 +69,7 @@ namespace Tests
 			stringstream s;
 			auto deck1 = cf->getDeck();
 
-			s << deck1;
-			s.seekp(0);
-			s << 'Q'; //corrupt the save with an extra Quartz card
+			s << deck1 << 'Q'; //corrupt the save with an extra Quartz card
 			s.seekg(0); //move back to start
 			
 			auto constructFromFile = [&] { Deck(s, cf); };
@@ -84,9 +82,7 @@ namespace Tests
 			stringstream s;
 			auto deck1 = cf->getDeck();
 
-			s << deck1;
-			s.seekp(0);
-			s << '1'; //corrupt the save with a number
+			s << deck1 << 1; //corrupt the save with a number
 			s.seekg(0); //move back to start
 
 			auto constructFromFile = [&] { Deck(s, cf); };

@@ -2,17 +2,25 @@
 #include "Deck.h"
 #include "DiscardPile.h"
 #include "TradeArea.h"
+#include <array>
+#include <iterator>
 
 class Table
 {
-	Player p1, p2;
-	Deck deck;
-	DiscardPile discardPile;
-	TradeArea tradeArea;
+	std::array<Player*,2> players;
+	int currentPlayer = 0;
+	Deck *deck;
+	DiscardPile *discardPile;
+	TradeArea *tradeArea;
 public:
-	Table();//voir dans le document pour le constructeur
-	bool win(std::string);
-	void printHand(bool);
+	Table(std::istream&, CardFactory*);
+	Table(Player*, Player*, Deck*, DiscardPile*, TradeArea*); //for constructor injection
 
-	void operator<< (int);
+	Player& currentTurn() const; //returns the player whose turn it is
+	Player& endTurn(); //ends a player's turn and returns the next player whose turn it is.
+	bool win(std::string&) const;
+
+	void print(std::ostream&) const;
+	friend std::ostream& operator<<(ostream&, const Table&);
+
 };

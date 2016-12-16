@@ -1,4 +1,3 @@
-#include <sstream>
 #include "Card.h"
 #include "CardFactory.h"
 #include "Deck.h"
@@ -14,16 +13,9 @@ Card* Deck::draw() {
 
 //Get the line with the Deck cards and read from that line as a stream.
 Deck::Deck(std::istream& in, CardFactory* cf) : vector<Card*>() {
-	string line;
-	std::getline(in, line);
-	istringstream lineStream(line);
 	char c;
-
-	while (lineStream >> c) {
+	while (in >> c) {
 		push_back(cf->loadCard(c));
-	}
-	if (!lineStream.eof()) {
-		throw corrupt_game_file();
 	}
 }
 
@@ -31,6 +23,5 @@ std::ostream& operator<<(std::ostream& out, const Deck& deck) {
 	for (Card* card : deck) {
 		out << card->getName()[0];
 	}
-	out << endl;
 	return out;
 }

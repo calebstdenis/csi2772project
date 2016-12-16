@@ -26,18 +26,14 @@ Card* TradeArea::trade(string gemName) {
 	Card *c = *pos;
 	cards.erase(pos);
 	return c;
-
 }
 
-int TradeArea::numCards()
-{
+int TradeArea::numCards() {
 	return cards.size();
 }
 
-std::ostream & operator<<(ostream & out, const TradeArea &tradeArea)
-{
+std::ostream & operator<<(ostream & out, const TradeArea &tradeArea) {
 	ostream_iterator<char> out_iter(out, " ");
 	transform(tradeArea.cards.begin(), tradeArea.cards.end(), out_iter, encodeCard);
-	out << endl;
 	return out;
 }
