@@ -12,7 +12,7 @@ class CardFactory
 	CardFactory();//créer toutes les cartes dans les bonnes proportions
 	static CardFactory *instance;
 	Deck deck;
-	std::multimap<char, Card*> cardSet;
+	std::multimap<char, Card*> unloadedCards;
 
 	template <class C> void addCards(int); //Helper function for initializing the cards
 	
@@ -25,7 +25,7 @@ public:
 
 	Deck getDeck();
 
-	Card* initCard(char); //Retrieves a card in the deck corresponding to the character - used to build from save file
+	Card* loadCard(char); //Retrieves a card in the deck corresponding to the character - used to build from save file
 
 	static constexpr int numCardsInDeck = 104;
 };

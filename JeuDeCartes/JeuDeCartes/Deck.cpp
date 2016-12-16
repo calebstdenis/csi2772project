@@ -20,7 +20,7 @@ Deck::Deck(std::istream& in, CardFactory* cf) : vector<Card*>() {
 	char c;
 
 	while (lineStream >> c) {
-		push_back(cf->initCard(c));
+		push_back(cf->loadCard(c));
 	}
 	if (!lineStream.eof()) {
 		throw corrupt_game_file();

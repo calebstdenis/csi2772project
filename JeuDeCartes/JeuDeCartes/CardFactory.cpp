@@ -13,11 +13,11 @@ template <class C> void CardFactory::addCards(int n) {
 	for (int i = 0; i < n; i++) {
 		Card* c = new C;
 		deck.push_back(c);
-		cardMap.insert({ c->getName()[0], c });
+		unloadedCards.insert({ c->getName()[0], c });
 	}
 }
 
-CardFactory::CardFactory() : deck(Deck()), cardMap() {
+CardFactory::CardFactory() : deck(Deck()), unloadedCards() {
 	deck.reserve(numCardsInDeck);
 	addCards<Quartz>(20);
 	addCards<Hematite>(18);
@@ -47,13 +47,13 @@ Deck CardFactory::getDeck() {
  * Given a character, this method returns a pointer to a Card that has not yet been added to Card container
  * The multimap allows us to quickly locate such a Card.
  * If no Cards are left in the multimap for a given character, then the save file is corrupt. */
-Card* CardFactory::initCard(char c) {
-	auto iterators = cardMap.equal_range(c); //iterators for the Cards corresponding to character "c"
+Card* CardFactory::loadCard(char c) {
+	auto iterators = unloadedCards.equal_range(c); //iterators for the Cards corresponding to character "c"
 	if (iterators.first == iterators.second) { //there are no more Cards of this type left to allocate
 		throw corrupt_game_file();
 	}
 	Card *card = iterators.first->second; //get a card of this type
-	cardMap.erase(iterators.first); //remove the card from the set
+	unloadedCards.erase(iterators.first); //remove the card from the set
 	return card;
 }
 
