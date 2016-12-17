@@ -43,7 +43,7 @@ namespace Tests
 			Assert::IsTrue(tradedMalachite1 != tradedMalachite2);
 
 			//exception should be thrown when attemping to trade a non-existant third Malachite
-			Assert::ExpectException<game_logic_error>(tradeMalachite); 
+			Assert::ExpectException<game_logic_exception>(tradeMalachite); 
 		}
 
 		TEST_METHOD(Size) {
@@ -96,6 +96,11 @@ namespace Tests
 			Assert::IsFalse(loadedTA.legal(e));
 		}
 
+		//Nullify CardFactory so that changes to state in one test do not carry over
+		TEST_METHOD_CLEANUP(resetUnloadedCards)
+		{
+			CardFactory::getFactory()->resetUnloadedCards();
+		}
 
 
 	};
