@@ -154,8 +154,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DeckTest.cpp" />
+    <ClCompile Include="CardFactoryDeckTest.cpp" />
     <ClCompile Include="CardTest.cpp" />
+    <ClCompile Include="TableTest.cpp" />
     <ClCompile Include="TradeAreaTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,5 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

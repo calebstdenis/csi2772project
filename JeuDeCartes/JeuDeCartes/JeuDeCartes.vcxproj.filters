@@ -45,9 +45,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="illegalType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Exceptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>

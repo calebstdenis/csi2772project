@@ -18,10 +18,13 @@
     <ClCompile Include="CardTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DeckTest.cpp">
+    <ClCompile Include="TradeAreaTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TradeAreaTest.cpp">
+    <ClCompile Include="CardFactoryDeckTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TableTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
