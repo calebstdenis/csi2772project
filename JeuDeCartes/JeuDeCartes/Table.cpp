@@ -39,6 +39,7 @@ void Table::print(std::ostream &out) const
 	out << *deck << endl;
 	//out << *discardPile << endl;
 	out << *tradeArea << endl;
+	out << currentPlayer << endl;
 }
 
 //Helper for constructing a table from the save file.
@@ -46,6 +47,10 @@ template <class T> T* constructSingleLineComponent(std::istream& in, CardFactory
 	string line;
 	std::getline(in, line);
 	istringstream lineStream(line);
+
+	if (!line || !lineStream) {
+		throw corrupt_game_file();
+	}
 
 	T *result = new T(lineStream, cf);
 
@@ -68,4 +73,16 @@ Table::Table(std::istream& in, CardFactory * cf)
 	deck = constructSingleLineComponent<Deck>(in, cf);
 	//discardPile = constructSingleLineComponent<DiscardPile>(in, cf);
 	tradeArea = constructSingleLineComponent<TradeArea>(in, cf);
+	if (!in >> currentPlayer) {
+		throw corrupt_game_file();
+	}
+}
+
+std::ostream & operator<<(ostream &out, const Table &table)
+{
+	out << endl;
+	out << "------" << endl;
+	out << "TABLE" << endl;
+	out << "------" << endl;
+	out << "PLAYER 1:" << endl;
 }
