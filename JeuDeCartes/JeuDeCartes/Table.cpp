@@ -48,7 +48,7 @@ template <class T> T* constructSingleLineComponent(std::istream& in, CardFactory
 	std::getline(in, line);
 	istringstream lineStream(line);
 
-	if (!line || !lineStream) {
+	if (!in || !lineStream) {
 		throw corrupt_game_file();
 	}
 
@@ -85,4 +85,6 @@ std::ostream & operator<<(ostream &out, const Table &table)
 	out << "TABLE" << endl;
 	out << "------" << endl;
 	out << "PLAYER 1:" << endl;
+
+	return out;
 }
