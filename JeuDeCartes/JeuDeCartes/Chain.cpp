@@ -1,17 +1,14 @@
+#include <iterator>
+#include <algorithm>
 #include "Chain.h"
-#include "illegalType.h"
+#include "GameExceptions.h"
 
-
-
-template <typename T: public Card> Chain<T>::Chain(const std::istream& is, CardFactory* cf)
-{
-
-}
-
-Chain<T>::Chain()
+template <class T>
+Chain<T>::Chain(std::istream& in, CardFactory* cf)
 {
 }
 
+template <class T>
 int Chain<T>::sell()
 {
 	int num = elements.size();
@@ -23,17 +20,19 @@ int Chain<T>::sell()
 	return 0;
 }
 
+template <class T>
 Chain<T>& Chain<T>::operator+= (Card* c)
 {
-	if (c->getName() == T.getName())
+	if (c->getName() == T::name)
 	{
 		elements.pushBack((T*)c);
 	}
 	else
-		throw illegalType;
-	return &this;
+		throw IllegalTypeException();
+	return *this;
 }
 
+template <class T>
 std::ostream& operator<<(std::ostream & os, const Chain<T> & chaine)
 {
 	os.write((char*)(T.name),T.name.size());

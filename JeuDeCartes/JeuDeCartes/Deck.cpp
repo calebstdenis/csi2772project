@@ -1,7 +1,7 @@
 #include "Card.h"
 #include "CardFactory.h"
 #include "Deck.h"
-#include "Exceptions.h"
+#include "GameExceptions.h"
 
 Deck::Deck() : vector<Card*>() {}
 

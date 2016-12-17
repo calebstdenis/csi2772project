@@ -1,5 +1,5 @@
 #include "TradeArea.h"
-#include "Exceptions.h"
+#include "GameExceptions.h"
 #include "CppUnitTest.h"
 #include <sstream>
 

@@ -1,5 +1,5 @@
 #include "Table.h"
-#include "Exceptions.h"
+#include "GameExceptions.h"
 #include <sstream>
 
 Table::Table(Player *p1, Player *p2, Deck *deck, DiscardPile *discardPile, TradeArea *tradeArea)
@@ -49,14 +49,14 @@ template <class T> T* constructSingleLineComponent(std::istream& in, CardFactory
 	istringstream lineStream(line);
 
 	if (!in || !lineStream) {
-		throw corrupt_game_file();
+		throw corrupt_game_file_exception();
 	}
 
 	T *result = new T(lineStream, cf);
 
 	//Input failed before reaching the end of the line
 	if (!in.eof()) {
-		throw corrupt_game_file();
+		throw corrupt_game_file_exception();
 	}
 
 	return result;
@@ -74,7 +74,7 @@ Table::Table(std::istream& in, CardFactory * cf)
 	//discardPile = constructSingleLineComponent<DiscardPile>(in, cf);
 	tradeArea = constructSingleLineComponent<TradeArea>(in, cf);
 	if (!in >> currentPlayer) {
-		throw corrupt_game_file();
+		throw corrupt_game_file_exception();
 	}
 }
 

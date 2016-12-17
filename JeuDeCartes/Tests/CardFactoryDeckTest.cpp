@@ -2,7 +2,7 @@
 #include "Deck.h"
 #include "CardFactory.h"
 #include "CppUnitTest.h"
-#include "Exceptions.h"
+#include "GameExceptions.h"
 #include <algorithm>
 #include <iterator>
 #include <functional>
@@ -74,7 +74,7 @@ namespace Tests
 			
 			auto constructFromFile = [&] { Deck(s, cf); };
 
-			Assert::ExpectException<corrupt_game_file>(constructFromFile);
+			Assert::ExpectException<corrupt_game_file_exception>(constructFromFile);
 		}
 
 		TEST_METHOD(LoadDeck_CorruptedSaveInvalidInput) {
@@ -87,7 +87,7 @@ namespace Tests
 
 			auto constructFromFile = [&] { Deck(s, cf); };
 
-			Assert::ExpectException<corrupt_game_file>(constructFromFile);
+			Assert::ExpectException<corrupt_game_file_exception>(constructFromFile);
 		}
 
 	};

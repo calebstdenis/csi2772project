@@ -4,7 +4,7 @@
 #include <string>
 #include "Card.h"
 #include "CardFactory.h"
-#include "Exceptions.h"
+#include "GameExceptions.h"
 
 using namespace std;
 
@@ -50,7 +50,7 @@ Deck CardFactory::getDeck() {
 Card* CardFactory::loadCard(char c) {
 	auto iterators = unloadedCards.equal_range(c); //iterators for the Cards corresponding to character "c"
 	if (iterators.first == iterators.second) { //there are no more Cards of this type left to allocate
-		throw corrupt_game_file();
+		throw corrupt_game_file_exception();
 	}
 	Card *card = iterators.first->second; //get a card of this type
 	unloadedCards.erase(iterators.first); //remove the card from the set
