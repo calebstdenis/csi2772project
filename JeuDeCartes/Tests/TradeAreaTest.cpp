@@ -96,7 +96,7 @@ namespace Tests
 			Assert::IsFalse(loadedTA.legal(e));
 		}
 
-		//Nullify CardFactory so that changes to state in one test do not carry over
+		//Reset CardFactory so that changes to state in one test do not carry over
 		TEST_METHOD_CLEANUP(resetUnloadedCards)
 		{
 			CardFactory::getFactory()->resetUnloadedCards();

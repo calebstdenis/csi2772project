@@ -26,6 +26,7 @@
     <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="GameExceptions.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="IOUtil.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="TradeArea.h" />
@@ -33,7 +34,6 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardFactory.cpp" />
-    <ClCompile Include="Chain.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DiscardPile.cpp" />
     <ClCompile Include="Hand.cpp" />
