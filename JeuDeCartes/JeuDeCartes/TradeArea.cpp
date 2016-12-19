@@ -5,7 +5,7 @@
 
 TradeArea::TradeArea(istream& in, CardFactory *cf) {
 	istream_iterator<char> in_iter(in), end;
-	transform(in_iter, end, back_inserter(cards), [cf](char c) { return cf->loadCard(c); });
+	transform(in_iter, end, back_inserter(cards), [&cf](char c) { return cf->loadCard(c); });
 }
 
 TradeArea& TradeArea::operator+=(Card *c) {
