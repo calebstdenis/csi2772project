@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameExceptions.h"
 
 Player::Player(std::string& nom)
 {
@@ -20,10 +21,10 @@ int Player::getNumCoins() const
 Player& Player::operator+= (int num)//ajoute des nouvelles pièces
 {
 	if (num < 0)
-		throw IllegalTypeException(num);
+		throw new IndexOutOfBoundsException(num);
 	else
 		numCoins += num;
-	return &this;
+	return this;
 }
 
 int Player::getMaxNumChains()
@@ -36,9 +37,9 @@ int Player::getNumChains()
 	return chain.size;
 }
 
-Chain& Player::operator[](int i)
+Chain<Card*>& Player::operator[](int i)
 {
-	return &chain[i];
+	return chain[i];
 }
 
 void Player::buyThirdChain()
@@ -46,7 +47,7 @@ void Player::buyThirdChain()
 	if (maxNumChain == 2)
 	{
 		if (numCoins < 2)
-			throw NotEnoughCoinsException();
+			throw new NotEnoughCoinsException();
 		else
 		{
 			numCoins -= 2;
@@ -59,7 +60,7 @@ void Player::printHand(std::ostream& os, bool premier)
 {
 	if (premier)
 	{
-		os >> main.top();//print la première carte
+		main.top()->print();
 	}
 	else
 	{
