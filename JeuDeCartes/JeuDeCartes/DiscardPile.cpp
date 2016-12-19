@@ -18,10 +18,11 @@ DiscardPile& DiscardPile::operator+=(Card* c)
 }
 std::ostream& operator<< (std::ostream & os, const DiscardPile & discardPile)
 {
-	os.write(discardPile.top()->getName().c_str, discardPile.top()->getName().size);
-	return *this;
+	os.write(discardPile.top()->getName().c_str, discardPile.top()->getName().size);//je ne suis pas sûr que c'est ca qu'il faut faire
+	return os;
 }
-void DiscardPile::print(std::ostream & os)
+
+/*void DiscardPile::print(std::ostream & os)
 {
 
-}
+}*/

@@ -49,14 +49,14 @@ int Chain<T>::size() {
 }
 
 template <class T>
-Chain<T>& Chain<T>::operator+= (Card* c)
+Chain<T>& Chain<T>::operator+= (Card* c) throw IllegalTypeException
 {
 	if (c->getName() == T::name)
 	{
 		elements.push_back((T*)c);
 	}
 	else
-		throw IllegalTypeException();
+		throw new IllegalTypeException();
 	return *this;
 }
 
@@ -66,7 +66,8 @@ std::ostream& operator<<(std::ostream & os, const Chain<T> &chaine)
 	os << T::name << std::setw(IOUtil::COLUMN_WIDTH);
 	for (int i = 0; i < chaine.elements.size(); i++)
 	{
-		os << T::name[0];
+		//os << T::name[0];
+		T.print();
 	}
 	return os;
 }
