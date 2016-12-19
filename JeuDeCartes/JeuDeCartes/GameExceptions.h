@@ -44,6 +44,7 @@ public:
 
 class NotEnoughCoinsException
 {
+public:
 	NotEnoughCoinsException() {}
 	virtual const char* what() const throw()
 	{
