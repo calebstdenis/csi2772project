@@ -72,7 +72,7 @@ int Player::getMaxNumChains()
 
 int Player::getNumChains()
 {
-	return chain.size;
+	return chain.size();
 }
 
 Chain<Card>& Player::operator[](int i)
@@ -85,7 +85,7 @@ void Player::buyThirdChain()
 	if (maxNumChain == 2)
 	{
 		if (numCoins < 2)
-			throw NotEnoughCoinsException(numCoins);
+			throw NotEnoughCoinsException();
 		else
 		{
 			numCoins -= 2;
