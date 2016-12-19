@@ -15,7 +15,7 @@ public:
 	Chain(std::istream&, CardFactory*);
 	int size();
 	int sell();
-	Chain<T>& operator+=(Card*);
+	Chain<T>& operator+=(Card*) throw IllegalTypeException;
 	template <class T> friend std::ostream& operator<<(std::ostream&, const Chain<T>&);
 };
 

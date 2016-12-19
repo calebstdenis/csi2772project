@@ -4,7 +4,7 @@
 Player::Player(std::string& nom)
 {
 	Player::nom = nom;
-	numCoins = 0;//il va falloir revérifier le nombre de pièces au départ
+	numCoins = 0;
 	maxNumChain = 2;
 }
 
@@ -24,7 +24,7 @@ Player& Player::operator+= (int num)//ajoute des nouvelles pièces
 		throw new IndexOutOfBoundsException(num);
 	else
 		numCoins += num;
-	return this;
+	return *this;
 }
 
 int Player::getMaxNumChains()
