@@ -24,4 +24,28 @@ public:
 	explicit game_logic_exception(const std::string &s) : std::runtime_error(s) {}
 };
 
+class IndexOutOfBoundsException
+{
+private:
+	int num;
+public:
+	IndexOutOfBoundsException(int num) 
+	{
+		this.num = num;
+	}
+	virtual const char* what() const throw()
+	{
+		return ("IndexOutOfBoundsException index " + num + " is out of bounds!");//on dois fixer ca
+	}
+};
+
+class NotEnoughCoinsException
+{
+	NotEnoughCoinsException() {}
+	virtual const char* what() const throw()
+	{
+		return ("vous n'avez pas assez de pièces");
+	}
+};
+
 #endif
