@@ -2,12 +2,13 @@
 #include <vector>
 
 class Card;
+class CardFactory;
 
 class DiscardPile {
 	std::vector<Card*> pile;
 public:
 	DiscardPile() = default;
-	DiscardPile(istream&, CardFactory*);
+	DiscardPile(std::istream&, CardFactory*);
 	DiscardPile& operator+=(Card*);
 	Card* pickUp();
 	Card* top()const;
