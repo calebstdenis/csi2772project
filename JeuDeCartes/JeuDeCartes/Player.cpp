@@ -18,7 +18,7 @@ Player::Player(std::istream & is, CardFactory* cf)
 		throw corrupt_game_file_exception();
 	main = *new Hand(is,cf);
 
-	ChainBase* c;
+	Chain_Base* c;
 	std::string s;
 	while (is >> s)
 	{
@@ -40,7 +40,7 @@ Player::Player(std::istream & is, CardFactory* cf)
 			c = new Chain<Emerald>(is, cf);
 		else
 			throw corrupt_game_file_exception();
-		chain.push_back(*c);
+		chain.push_back(c);
 	}
 	if (getNumChains() > maxNumChain)
 		throw corrupt_game_file_exception();
@@ -72,12 +72,12 @@ int Player::getMaxNumChains()
 
 int Player::getNumChains()
 {
-	return chain.size();
+	return (int)chain.size();
 }
 
-Chain<Card>& Player::operator[](int i)
+Chain_Base& Player::operator[](int i)
 {
-	return chain[i];
+	return *chain[i];
 }
 
 void Player::buyThirdChain()
@@ -109,10 +109,11 @@ void Player::printHand(std::ostream& os, bool premier)
 std::ostream& operator<<(std::ostream& os, const Player & player)
 {
 	os << player.nom << std::setw(IOUtil::COLUMN_WIDTH) << player.numCoins << " Coins" << endl;
-	for (Chain<Card> c : player.chain)
+	for (Chain_Base* c : player.chain)
 	{
-		os << c;
+		os << *c;
 	}
+	return os;
 }
 
 void Player::print(std::ostream& os)
@@ -121,7 +122,7 @@ void Player::print(std::ostream& os)
 	os << numCoins << endl;
 	os << maxNumChain << endl;
 	os << main << endl;
-	for (Chain<Card> c : chain)
+	for (Chain_Base* c : chain)
 	{
 		os << c << endl;
 	}

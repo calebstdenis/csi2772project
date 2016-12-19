@@ -21,7 +21,7 @@ class Chain_Base {
 	virtual int sell() const = 0;
 	virtual Chain_Base& operator+=(Card*) = 0;
 	virtual void print(ostream&) const = 0;
-	friend std::ostream& operator<<(std::ostream& os, const Chain_Base& cb) { cb.print(os); }
+	friend std::ostream& operator<<(std::ostream& os, const Chain_Base& cb) { cb.print(os); return os; }
 };
 
 template <class T> class Chain : public Chain_Base {
@@ -76,10 +76,10 @@ Chain<T>& Chain<T>::operator+= (Card* c) {
 }
 
 template<class T>
-inline void Chain<T>::print(ostream & os) const {
+void Chain<T>::print(ostream & os) const {
 	os << T::name << std::setw(IOUtil::COLUMN_WIDTH);
-	for (int i = 0; i < chaine.elements.size(); i++)
+	for (int i = 0; i < elements.size(); i++)
 	{
-		os << chaine.elements[i] << " ";
+		os << elements[i] << " ";
 	}
 }
