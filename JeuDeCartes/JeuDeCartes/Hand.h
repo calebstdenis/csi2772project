@@ -9,9 +9,10 @@ class Hand
 	std::deque<Card*> main;
 public:
 	Hand() = default;
-	Hand(const std::istream&, CardFactory*);
+	Hand(std::istream&, CardFactory*);
 	Hand& operator+=(Card*);
 	Card* play();
 	Card* top();
 	Card* operator[](int);
+	friend std::ostream& operator<<(std::ostream&, const Hand&);
 };

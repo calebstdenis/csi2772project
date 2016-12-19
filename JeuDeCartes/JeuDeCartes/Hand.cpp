@@ -1,5 +1,14 @@
 #include "Hand.h"
 #include "Card.h"
+#include "CardFactory.h"
+
+Hand::Hand(std::istream& is, CardFactory* cf)
+{
+	char c;
+	while (is >> c) {
+		main.push_back(cf->loadCard(c));
+	}
+}
 
 Hand& Hand::operator+= (Card* c)
 {
@@ -31,4 +40,11 @@ Card* Hand::operator[] (const int i)
 			main.push_back(play());
 	}
 	return c;
+}
+
+std::ostream& operator<<(std::ostream& os, const Hand& hand)
+{
+	for (Card* card : hand.main) {
+		os << card->getName()[0];
+	}
 }
