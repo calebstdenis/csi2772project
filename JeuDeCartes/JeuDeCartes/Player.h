@@ -10,7 +10,7 @@ class Player
 	std::string nom;
 	int numCoins;
 	int maxNumChain;
-	std::vector<Chain<Card*>> chain;
+	std::vector<Chain<Card>> chain;
 	Hand main;
 public:
 	Player(std::string&);
@@ -20,7 +20,7 @@ public:
 	Player & operator+=(int);
 	int getMaxNumChains();
 	int getNumChains();
-	Chain<Card*> & operator[] (int);
+	Chain<Card> & operator[] (int);
 	void buyThirdChain();
 	void printHand(std::ostream&, bool);
 	friend std::ostream& operator<<(std::ostream&, const Player &);
