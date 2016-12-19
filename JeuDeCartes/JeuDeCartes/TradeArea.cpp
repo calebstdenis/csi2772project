@@ -33,8 +33,7 @@ int TradeArea::numCards() {
 }
 
 std::ostream & operator<<(ostream & out, const TradeArea &tradeArea) {
-	for (auto it = tradeArea.cards.cbegin(); it != tradeArea.cards.cend(); it++) {
-		out << *it << " ";
-	}
+	ostream_iterator<Card*> it(out, " ");
+	copy(tradeArea.cards.cbegin(), tradeArea.cards.cend(), it);
 	return out;
 }

@@ -45,6 +45,7 @@ Card* Hand::operator[] (const int i)
 std::ostream& operator<<(std::ostream& os, const Hand& hand)
 {
 	for (Card* card : hand.main) {
-		os << card->getName()[0];
+		os << card << " ";
 	}
+	return os;
 }
