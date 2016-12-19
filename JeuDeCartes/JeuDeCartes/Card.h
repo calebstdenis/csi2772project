@@ -14,10 +14,10 @@ public:
 	
 	virtual int getCardsPerCoin(int) const = 0;
 	virtual string getName() const = 0;
-};
+	virtual void print(ostream&) const = 0;
 
-inline char encodeCard(Card *c) { return c->getName()[0]; }
-//codifies Cards (as the first character of its gemstone name). Intended for use with standard algorithms.
+	friend ostream& operator<<(std::ostream&, const Card*);
+};
 
 class Quartz : public Card { 
 	static const int cardsPerCoin[4];
@@ -25,6 +25,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Hematite : public Card {
@@ -33,6 +34,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Obsidian : public Card {
@@ -41,6 +43,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Malachite : public Card {
@@ -49,6 +52,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Turquoise : public Card {
@@ -57,6 +61,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Amethyst : public Card {
@@ -65,6 +70,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Ruby : public Card {
@@ -73,6 +79,7 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 
 class Emerald : public Card {
@@ -81,5 +88,6 @@ public:
 	static const string name;
 	string getName() const override final;
 	int getCardsPerCoin(int) const override final;
+	void print(ostream&) const override final;
 };
 #endif

@@ -15,7 +15,7 @@ public:
 	Chain(std::istream&, CardFactory*);
 	int size();
 	int sell();
-	Chain<T>& operator+=(Card*) throw IllegalTypeException;
+	Chain<T>& operator+=(Card*);
 	template <class T> friend std::ostream& operator<<(std::ostream&, const Chain<T>&);
 };
 
@@ -49,14 +49,13 @@ int Chain<T>::size() {
 }
 
 template <class T>
-Chain<T>& Chain<T>::operator+= (Card* c) throw IllegalTypeException
-{
+Chain<T>& Chain<T>::operator+= (Card* c) {
 	if (c->getName() == T::name)
 	{
 		elements.push_back((T*)c);
 	}
 	else
-		throw new IllegalTypeException();
+		throw IllegalTypeException();
 	return *this;
 }
 
@@ -66,8 +65,7 @@ std::ostream& operator<<(std::ostream & os, const Chain<T> &chaine)
 	os << T::name << std::setw(IOUtil::COLUMN_WIDTH);
 	for (int i = 0; i < chaine.elements.size(); i++)
 	{
-		//os << T::name[0];
-		T.print();
+		os << chaine.elements[i] << " ";
 	}
 	return os;
 }
