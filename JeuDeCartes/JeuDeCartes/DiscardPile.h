@@ -6,8 +6,8 @@ class Card;
 class DiscardPile {
 	std::vector<Card*> pile;
 public:
-	DiscardPile();
-	DiscardPile(const istream&, CardFactory*);
+	DiscardPile() = default;
+	DiscardPile(istream&, CardFactory*);
 	DiscardPile& operator+=(Card*);
 	Card* pickUp();
 	Card* top()const;

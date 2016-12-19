@@ -1,5 +1,14 @@
 #include "DiscardPile.h"
 #include "Card.h"
+#include "CardFactory.h"
+
+DiscardPile::DiscardPile(istream& is, CardFactory* cf)
+{
+	char c;
+	while (is >> c) {
+		pile.push_back(cf->loadCard(c));
+	}
+}
 
 Card* DiscardPile::top() const
 {
@@ -18,11 +27,13 @@ DiscardPile& DiscardPile::operator+=(Card* c)
 }
 std::ostream& operator<< (std::ostream & os, const DiscardPile & discardPile)
 {
-	os.write(discardPile.top()->getName().c_str, discardPile.top()->getName().size);//je ne suis pas sûr que c'est ca qu'il faut faire
+	os << discardPile.pile.front()->getName()[0];
 	return os;
 }
 
-/*void DiscardPile::print(std::ostream & os)
+void DiscardPile::print(std::ostream & os)
 {
-
-}*/
+	for (Card* card : pile) {
+		os << card->getName()[0];
+	}
+}
