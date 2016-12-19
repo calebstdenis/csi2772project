@@ -8,6 +8,11 @@ Player::Player(std::string& nom)
 	maxNumChain = 2;
 }
 
+Player::Player(std::istream & is, CardFactory* cf)
+{
+
+}
+
 std::string Player::getName() const
 {
 	return nom;
@@ -64,7 +69,18 @@ void Player::printHand(std::ostream& os, bool premier)
 	}
 	else
 	{
-		//print toute la main
+		os << main;
 	}
 }
+
+std::ostream& operator<<(std::ostream& os, const Player & player)
+{
+	os << player.nom << std::setw(IOUtil::COLUMN_WIDTH) << player.numCoins << " Coins" << endl;
+	for (Chain<Card*> c : player.chain)
+	{
+		os << c;
+	}
+}
+
+
 

@@ -2,6 +2,8 @@
 #include <vector>
 #include "Chain.h"
 #include "Hand.h"
+#include "CardFactory.h"
+
 
 class Player
 {
@@ -12,7 +14,7 @@ class Player
 	Hand main;
 public:
 	Player(std::string&);
-	Player(const std::istream &, bool);
+	Player(std::istream &, CardFactory*);
 	std::string getName() const;
 	int getNumCoins() const;
 	Player & operator+=(int);
@@ -22,4 +24,6 @@ public:
 	void buyThirdChain();
 	void printHand(std::ostream&, bool);
 	friend std::ostream& operator<<(std::ostream&, const Player &);
+	// ajouté la méthode print pour enregistrer
+	void print(std::ostream&);
 };
