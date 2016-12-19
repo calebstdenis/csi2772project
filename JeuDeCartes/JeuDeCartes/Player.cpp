@@ -113,6 +113,7 @@ std::ostream& operator<<(std::ostream& os, const Player & player)
 	{
 		os << *c;
 	}
+	return os;
 }
 
 void Player::print(std::ostream& os)
