@@ -4,12 +4,18 @@
 
 using namespace std;
 
+ostream& operator<<(std::ostream& o, const Card* c) {
+	c->print(o);
+	return o;
+}
+
 int getCardsPerCoin(int numCoins, const int(&cardsPerCoin)[4]) {
 	if (numCoins <= 0 || numCoins > 4) {
 		throw invalid_argument("The number of coins must be a positive integer.");
 	}
 	return cardsPerCoin[numCoins - 1];
 }
+
 
 const string Quartz::name = "Quartz";
 const string Hematite::name = "Hematite";
@@ -37,6 +43,15 @@ string Turquoise::getName() const { return name; }
 string Ruby::getName() const { return name; }
 string Amethyst::getName() const { return name; }
 string Emerald::getName() const { return name; }
+
+void Quartz::print(ostream& os) const { os << name[0]; }
+void Hematite::print(ostream& os) const { os << name[0]; }
+void Obsidian::print(ostream& os) const { os << name[0]; }
+void Malachite::print(ostream& os) const { os << name[0]; }
+void Turquoise::print(ostream& os) const { os << name[0]; }
+void Ruby::print(ostream& os) const { os << name[0]; }
+void Amethyst::print(ostream& os) const { os << name[0]; }
+void Emerald::print(ostream& os) const { os << name[0]; }
 
 int Quartz::getCardsPerCoin(int numCoins) const {
 	return ::getCardsPerCoin(numCoins, cardsPerCoin);

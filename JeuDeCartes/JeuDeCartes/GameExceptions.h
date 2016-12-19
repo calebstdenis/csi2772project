@@ -2,6 +2,7 @@
 #define GAME_EXCEPTIONS_H
 
 #include <string>
+#include <sstream>
 
 class IllegalTypeException
 {
@@ -31,11 +32,13 @@ private:
 public:
 	IndexOutOfBoundsException(int num) 
 	{
-		this.num = num;
+		this->num = num;
 	}
 	virtual const char* what() const throw()
 	{
-		return ("IndexOutOfBoundsException index " + num + " is out of bounds!");//on dois fixer ca
+		std::stringstream msg;
+		msg << "IndexOutOfBoundsException index " << num << " is out of bounds!";
+		return msg.str().c_str();
 	}
 };
 
