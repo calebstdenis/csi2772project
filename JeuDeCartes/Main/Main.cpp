@@ -1,6 +1,27 @@
 #include "Table.h"
 #include <iostream>
 
+bool query(char* text)
+{
+	cout << text << endl << "o/n";
+	char c;
+	do
+		cin >> c;
+	while (c == 'o' || c == 'n');
+	if (c == 'o')
+		return true;
+	return false;
+}
+
+std::string getString(char* text)
+{
+	cout << text << endl;
+	std::string s;
+	cin >> s;
+	return s;
+}
+
+
 int main()
 {
 	//singleton CardFactory
@@ -26,9 +47,10 @@ int main()
 
 	if (début)//piger 5 cartes au début de la partie
 	{ 
-		for (int i = 0; i<5;i++)
-		p1->draw(deck->draw());
-		p2->draw(deck->draw());
+		for (int i = 0; i < 5; i++) {
+			p1->draw(deck->draw());
+			p2->draw(deck->draw());
+		}
 	}
 	Player* current;
 	while (!deck->empty())
@@ -88,24 +110,3 @@ int main()
 
     return 0;
 }
-
-bool query(char* text)
-{
-	cout << text << endl << "o/n";
-	char c;
-	do
-	cin >> c;
-	while (c == 'o' || c == 'n');
-	if (c == 'o')
-		return true;
-	return false;
-}
-
-std::string getString(char* text)
-{
-	cout << text << endl;
-	std::string s;
-	cin >> s;
-	return s;
-}
-
