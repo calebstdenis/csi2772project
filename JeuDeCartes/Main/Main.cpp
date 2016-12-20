@@ -47,6 +47,28 @@ int main()
 		cout << table;//je ne crois pas que ca affiche la bonne chose
 		//piger la première carte de deck
 		current->draw(deck->draw());
+		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
+		while (query("ajouter des cartes placés en échange?") && tradeArea->numCards() > 0)
+		{
+			//afficher les cartes de tradeArea
+			cout << tradeArea;//pas sûr que c'est la bonne chose mais si ca affiche juste les cartes c'est bon
+			try
+			{
+				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter à vos chaînes:"))); //méthode a implémenter pour ajouter une carte dans une chaine
+			}
+			catch (game_logic_exception e)
+			{
+				e.what();
+			}
+		}
+		//vider tradeArea
+		//méthode non implémenté pour faire cela
+
+		//jouer la première carte de la main du joueur
+		cout << "placer la première carte /n";
+		current->printHand(cout, true);//imprimer la première carte
+		//jouer la carte
+		current->play();
 	}
 
     return 0;

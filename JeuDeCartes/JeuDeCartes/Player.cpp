@@ -133,5 +133,10 @@ void Player::draw(Card * c)
 	main += c;
 }
 
+void Player::play(Card * c = main.top())//ca me une erreur mais je crois que tu peux comprendre ce que j'essai de faire, si ca ca marche pas on peut toujours utiliser le polymorphisme
+{
+
+}
+
 
 
