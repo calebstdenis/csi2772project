@@ -104,6 +104,7 @@ void Player::printHand(std::ostream& os, bool premier)
 	{
 		os << main;
 	}
+	os << endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const Player & player)

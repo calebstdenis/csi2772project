@@ -60,10 +60,10 @@ int main()
 		//afficher la table pour le joueur
 		cout << table;
 		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
-		while (query("ajouter des cartes places en echange?") && tradeArea->numCards() > 0)
+		while (tradeArea->numCards() > 0 && query("prendre des cartes places en echange?"))
 		{
 			//afficher les cartes de tradeArea
-			cout << tradeArea;//pas sûr que c'est la bonne chose mais si ca affiche juste les cartes c'est bon
+			cout << tradeArea << endl;
 			try
 			{
 				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter a vos chaines:"))); 
@@ -78,30 +78,31 @@ int main()
 		do
 		{
 			//jouer la première carte de la main du joueur
-			cout << "placer la première carte" << endl;
-			current->printHand(cout, true);//imprimer la première carte
+			cout << "Vous jouez la carte superieure de votre main, qui est: ";
+			current->printHand(cout, true); //imprimer la première carte
 			current->play();
-			cout << "voici votre main a present" << endl;
+			cout << "Voici votre main a present: " << endl;
 			current->printHand(cout, false);
 		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));
 
 		//se débarasser d'une carte arbitraire
 		cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;
 		current->printHand(cout, false);
+
 		int num;
 		cin >> num;
 		*discardPile += current->removeIndex(num);
 
 		//placer les 3 premières carts de deck dans tradeArea et placer les cartes de DiscardPile qui matchent dessus
-		for (int i = 0; i<3; i++)
+		for (int i = 0; i<3 && !deck->empty(); i++)
 			*tradeArea += deck->draw();
-		while (tradeArea->legal(discardPile->top()))
+		while (discardPile->size() != 0 && tradeArea->legal(discardPile->top()))
 			*tradeArea += discardPile->pickUp();
 
 		//le joueur pige deux cartes
-		current->draw(deck->draw());
-		current->draw(deck->draw());
-
+		for (int i = 0; i < 2 && !deck->empty(); i++) {
+			current->draw(deck->draw());
+		}
 		table.endTurn();
 	}
 

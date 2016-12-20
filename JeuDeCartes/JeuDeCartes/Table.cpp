@@ -93,9 +93,9 @@ std::ostream & operator<<(ostream & out, const Table &table)
 	for (int i = 0; i < table.players.size(); i++) {
 		out << "JOUEUR " << i;
 		if (table.currentPlayer == i) {
-			out << " (ton tour):";
+			out << " (ton tour)";
 		}
-		out << endl;
+		out << ":" << endl;
 		out << *table.players[i] << endl;
 	}
 	out << "DISCARD PILE:" << endl;
