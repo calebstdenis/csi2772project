@@ -1,6 +1,5 @@
 #include "Table.h"
 #include "GameExceptions.h"
-#include <sstream>
 
 Table::Table(Player *p1, Player *p2, Deck *deck, DiscardPile *discardPile, TradeArea *tradeArea)
 	:players{p1, p2}, deck(deck), discardPile(discardPile), tradeArea(tradeArea) {}
@@ -85,7 +84,7 @@ Table::Table(std::istream& in, CardFactory * cf)
 	}
 }
 
-std::ostream & operator<<(ostream &out, const Table &table)
+std::ostream & operator<<(ostream & out, const Table &table)
 {
 	out << endl;
 	out << "---------" << endl;
@@ -94,7 +93,7 @@ std::ostream & operator<<(ostream &out, const Table &table)
 	for (int i = 0; i < table.players.size(); i++) {
 		out << "JOUEUR " << i;
 		if (table.currentPlayer == i) {
-			out << i << "(Ton Tour):";
+			out << " (ton tour):";
 		}
 		out << endl;
 		out << *table.players[i] << endl;
