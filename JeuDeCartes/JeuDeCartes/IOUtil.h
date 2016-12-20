@@ -7,6 +7,7 @@
 
 namespace IOUtil {
 	constexpr int COLUMN_WIDTH = 5;
+	constexpr char SAVE_FILE[] = "save";
 
 	template <class T> T promptForInput(std::string msg) {
 		std::cout << msg << std::endl;

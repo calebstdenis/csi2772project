@@ -1,5 +1,7 @@
 #include "Table.h"
+#include "GameExceptions.h"
 #include <iostream>
+#include <fstream>
 
 bool query(char* text)
 {
@@ -32,14 +34,25 @@ int main()
 	DiscardPile* discardPile;
 	TradeArea* tradeArea; 
 
+	Table* table;
+
 	bool loadFromSave = IOUtil::promptForInput<bool>("Charger la partie sauvegardee?");
 
 	if (loadFromSave) {
-		p1 = new Player(cin, instance);
-		p2 = new Player(cin, instance);
-		deck = new Deck(cin, instance);
-		discardPile = new DiscardPile(cin, instance);
-		tradeArea = new TradeArea(cin, instance);
+		try {
+			ifstream saveIn(IOUtil::SAVE_FILE);
+			table = new Table(saveIn, instance);
+		}
+		catch (corrupt_game_file_exception e) {
+			cout << "Le fichier de jeu est corrompu!" << endl;
+			IOUtil::promptForInput<char>("Appuyez Enter pour quitter.");
+			return 1;
+		}
+		p1 = table->getPlayer1();
+		p2 = table->getPlayer2();
+		deck = table->getDeck();
+		discardPile = table->getDiscardPile();
+		tradeArea = table->getTradeArea();
 	}
 	else {
 		string p1Name = IOUtil::promptForInput<string>("nom de Joueur 1");
@@ -50,19 +63,24 @@ int main()
 		discardPile = new DiscardPile();
 		tradeArea = new TradeArea();
 
+		table = new Table(p1, p2, deck, discardPile, tradeArea);
+
 		for (int i = 0; i < 5; i++) {
 			p1->draw(deck->draw());
 			p2->draw(deck->draw());
 		}
 	}
 
-	//créer table
-	Table table(p1,p2,deck,discardPile,tradeArea);
-
 	Player* current;
-	while (!deck->empty())
+	string winner;
+	while (!table->win(winner))
 	{
-		current = &table.currentTurn();
+		if (IOUtil::promptForInput<bool>("Quitter et sauvegarder le jeu?")) {
+			ofstream save(IOUtil::SAVE_FILE);
+			table->print(save);
+			return 0;
+		}
+		current = &table->currentTurn();
 
 		//afficher la table pour le joueur
 		cout << table;
@@ -79,9 +97,10 @@ int main()
 			catch (game_logic_exception e)
 			{
 				e.what();
+				return 1;
 			}
 		}
-		table.clearTradeArea();
+		table->clearTradeArea();
 
 		do
 		{
@@ -111,17 +130,10 @@ int main()
 		for (int i = 0; i < 2 && !deck->empty(); i++) {
 			current->draw(deck->draw());
 		}
-		table.endTurn();
+		table->endTurn();
 	}
-	//fin du jeu
-	if (p1->getNumCoins() > p2->getNumCoins())
-		cout << "Victoire joueur 1" << endl;
-	else if (p1->getNumCoins() < p2->getNumCoins())
-		cout << "Victoire joueur 2" << endl;
-	else
-		cout << "égalitée" << endl;
-	cout << "appuyex entré pour terminer la partie";
-	cin >> début;//juste pour ne pas terminer tout de suite
+	cout << "Victoire " << winner << endl;
+	IOUtil::promptForInput<char>("Appuyez Enter pour terminer la partie.");
 
     return 0;
 }

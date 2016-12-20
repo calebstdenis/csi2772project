@@ -38,10 +38,34 @@ void Table::clearTradeArea() {
 	tradeArea->cards.clear();
 }
 
+Player * Table::getPlayer1() const
+{
+	return players[1];
+}
+
+Player * Table::getPlayer2() const
+{
+	return players[1];
+}
+
+Deck * Table::getDeck() const
+{
+	return deck;
+}
+
+DiscardPile * Table::getDiscardPile() const {
+	return discardPile;
+}
+
+TradeArea * Table::getTradeArea() const
+{
+	return tradeArea;
+}
+
 void Table::print(std::ostream &out) const
 {
-	out << *players[0] << endl;
-	out << *players[1] << endl;
+	players[0]->print(out);
+	players[1]->print(out);
 	out << *deck << endl;
 	out << *discardPile << endl;
 	out << *tradeArea << endl;
