@@ -20,6 +20,8 @@ public:
 	Player& endTurn(); //ends a player's turn and returns the next player whose turn it is.
 	bool win(std::string&) const;
 
+	void clearTradeArea(); //adds unwanted TradeArea cards to the Discard Pile
+
 	void print(std::ostream&) const;
 	friend std::ostream& operator<<(ostream&, const Table&);
 

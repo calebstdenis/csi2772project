@@ -32,6 +32,11 @@ bool Table::win(std::string& winner) const
 	return true;
 }
 
+void Table::clearTradeArea()
+{
+
+}
+
 void Table::print(std::ostream &out) const
 {
 	out << *players[0] << endl;

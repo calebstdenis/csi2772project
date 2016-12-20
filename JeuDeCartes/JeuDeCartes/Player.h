@@ -24,9 +24,9 @@ public:
 	void buyThirdChain();
 	void printHand(std::ostream&, bool);
 	friend std::ostream& operator<<(std::ostream&, const Player &);
-	// ajouté la méthode print pour enregistrer
-	void print(std::ostream&);
+	void print(std::ostream&); // ajouté la méthode print pour enregistrer
 	void draw(Card*);
 	//ajouté play pour jouer une carte
-	void play(Card* = main.top());
+	void play();
+	void play(Card*);
 };
