@@ -89,6 +89,8 @@ int main()
 		{
 			//afficher les cartes de tradeArea
 			cout << tradeArea << endl;
+			//afficher les piles du joueur
+			cout << *current << endl;
 			try
 			{
 				string cardName = IOUtil::promptForInput<string>("Entrez le nom complet de la carte a ajouter a vos chaines: ");
@@ -97,7 +99,7 @@ int main()
 			catch (game_logic_exception e)
 			{
 				e.what();
-				return 1;
+				//return 1;//ne retourne rien ici ca finit le jeu
 			}
 		}
 		table->clearTradeArea();
@@ -108,6 +110,8 @@ int main()
 			cout << "Vous jouez la carte superieure de votre main, qui est: ";
 			current->printHand(cout, true); //imprimer la première carte
 			current->play();
+			//afficher les piles du joueur
+			cout << *current << endl;
 			cout << "Voici votre main a present: " << endl;
 			current->printHand(cout, false);
 		} while (!(current->isHandEmpty()) && IOUtil::promptForInput<bool>("jouer une autre carte?"));

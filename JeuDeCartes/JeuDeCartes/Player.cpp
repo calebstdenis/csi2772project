@@ -177,8 +177,9 @@ void Player::play(Card *c)
 		{
 			//vendre une chaine
 			int num = 10;
-			while (num > maxNumChain)
-				num = IOUtil::promptForInput<int>("choisir une chaine a vendre (l'index commence a 0)");
+			cout << "choisir une chaine a vendre (l'index commence a 0)" << endl;
+			while (num > maxNumChain)//ca c'est la bonne chose tu l'as changé en un erreur
+				cin >> num;
 			*this+=chain[num]->sell();
 		}
 	}
