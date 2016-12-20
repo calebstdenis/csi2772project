@@ -8,7 +8,7 @@ int main()
 	//autres variables
 	Player* p1 = new Player(getString("nom de Joueur 1"));
 	Player* p2 = new Player(getString("nom de Joueur 2"));
-	Deck* deck = &(instance->getDeck());
+	Deck* deck = new Deck(instance->getDeck());
 	DiscardPile* discardPile = new DiscardPile();
 	TradeArea* tradeArea = new TradeArea();
 	bool début = true;
@@ -66,7 +66,13 @@ int main()
 			cout << "voici votre main a présent";
 			current->printHand(cout, false);
 		} while (query("jouer une autre carte?"));//ajouter la condition de la main du joueur qui est vide
-		
+
+		//se débarasser d'une carte arbitraire
+		cout << "choisir une carte par son numéro (en commencant par 0 pour la première carte) pour s'en débarasser /n";
+		current->printHand(cout, false);
+		//on dois avoir la main du joueur et faire main[i] et placer cette carte dans discardPile
+		*discardPile+=
+
 		table.endTurn();
 	}
 
