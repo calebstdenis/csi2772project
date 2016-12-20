@@ -8,7 +8,7 @@ int main()
 	//autres variables
 	Player* p1 = new Player(getString("nom de Joueur 1"));
 	Player* p2 = new Player(getString("nom de Joueur 2"));
-	Deck* deck = &instance->getDeck();
+	Deck* deck = &(instance->getDeck());
 	DiscardPile* discardPile = new DiscardPile();
 	TradeArea* tradeArea = new TradeArea();
 	bool début = true;
@@ -30,19 +30,11 @@ int main()
 		p1->draw(deck->draw());
 		p2->draw(deck->draw());
 	}
-	Player* current = p2;
+	Player* current;
 	while (!deck->empty())
 	{
-		if (current == p1)//changer de joueur à chaque ronde
-		{
-			current = p2;
-			cout << "C'est le tour du joueur 2 /n";
-		}
-		else
-		{
-			current = p1;
-			cout << "C'est le tour du joueur 1 /n";
-		}
+		current = &table.currentTurn();
+
 		//afficher la table pour le joueur
 		cout << table;//je ne crois pas que ca affiche la bonne chose
 		//piger la première carte de deck
@@ -64,11 +56,18 @@ int main()
 		//vider tradeArea
 		//méthode non implémenté pour faire cela
 
-		//jouer la première carte de la main du joueur
-		cout << "placer la première carte /n";
-		current->printHand(cout, true);//imprimer la première carte
-		//jouer la carte
-		current->play();
+		do
+		{
+			//jouer la première carte de la main du joueur
+			cout << "placer la première carte /n";
+			current->printHand(cout, true);//imprimer la première carte
+			//jouer la carte
+			current->play();
+			cout << "voici votre main a présent";
+			current->printHand(cout, false);
+		} while (query("jouer une autre carte?"));//ajouter la condition de la main du joueur qui est vide
+		
+		table.endTurn();
 	}
 
     return 0;
