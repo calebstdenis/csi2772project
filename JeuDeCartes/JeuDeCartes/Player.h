@@ -26,4 +26,5 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const Player &);
 	// ajouté la méthode print pour enregistrer
 	void print(std::ostream&);
+	void draw(Card*);
 };

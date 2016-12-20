@@ -128,5 +128,10 @@ void Player::print(std::ostream& os)
 	}
 }
 
+void Player::draw(Card * c)
+{
+	main += c;
+}
+
 
 

@@ -5,11 +5,13 @@ int main()
 {
 	//singleton CardFactory
 	CardFactory* instance;
+	//autres variables
 	Player* p1 = new Player(getString("nom de Joueur 1"));
 	Player* p2 = new Player(getString("nom de Joueur 2"));
 	Deck* deck = &instance->getDeck();
 	DiscardPile* discardPile = new DiscardPile();
 	TradeArea* tradeArea = new TradeArea();
+	bool début = true;
 	if (query("charger la partie sauvegardée?"))
 	{
 		p1 = new Player(cin, instance);
@@ -17,13 +19,34 @@ int main()
 		deck = new Deck(cin, instance);
 		discardPile = new DiscardPile(cin, instance);
 		tradeArea = new TradeArea(cin, instance);
+		début = false;
 	}
 	//créer table
 	Table table(p1,p2,deck,discardPile,tradeArea);
-	
+
+	if (début)//piger 5 cartes au début de la partie
+	{ 
+		for (int i = 0; i<5;i++)
+		p1->draw(deck->draw());
+		p2->draw(deck->draw());
+	}
+	Player* current = p2;
 	while (!deck->empty())
 	{
-
+		if (current == p1)//changer de joueur à chaque ronde
+		{
+			current = p2;
+			cout << "C'est le tour du joueur 2 /n";
+		}
+		else
+		{
+			current = p1;
+			cout << "C'est le tour du joueur 1 /n";
+		}
+		//afficher la table pour le joueur
+		cout << table;//je ne crois pas que ca affiche la bonne chose
+		//piger la première carte de deck
+		current->draw(deck->draw());
 	}
 
     return 0;
