@@ -27,31 +27,38 @@ int main()
 	//singleton CardFactory
 	CardFactory* instance = CardFactory::getFactory();
 	//autres variables
-	Player* p1 = new Player(getString("nom de Joueur 1"));
-	Player* p2 = new Player(getString("nom de Joueur 2"));
-	Deck* deck = new Deck(instance->getDeck());
-	DiscardPile* discardPile = new DiscardPile();
-	TradeArea* tradeArea = new TradeArea();
-	bool début = true;
-	if (query("charger la partie sauvegardee?"))
-	{
+	Player* p1, *p2;
+	Deck* deck;
+	DiscardPile* discardPile;
+	TradeArea* tradeArea; 
+
+	bool loadFromSave = IOUtil::promptForInput<bool>("Charger la partie sauvegardee?");
+
+	if (loadFromSave) {
 		p1 = new Player(cin, instance);
 		p2 = new Player(cin, instance);
 		deck = new Deck(cin, instance);
 		discardPile = new DiscardPile(cin, instance);
 		tradeArea = new TradeArea(cin, instance);
-		début = false;
 	}
-	//créer table
-	Table table(p1,p2,deck,discardPile,tradeArea);
+	else {
+		string p1Name = IOUtil::promptForInput<string>("nom de Joueur 1");
+		string p2Name = IOUtil::promptForInput<string>("nom de Joueur 2");
+		p1 = new Player(p1Name);
+		p2 = new Player(p2Name);
+		deck = new Deck(instance->getDeck());
+		discardPile = new DiscardPile();
+		tradeArea = new TradeArea();
 
-	if (début)//piger 5 cartes au début de la partie
-	{ 
 		for (int i = 0; i < 5; i++) {
 			p1->draw(deck->draw());
 			p2->draw(deck->draw());
 		}
 	}
+
+	//créer table
+	Table table(p1,p2,deck,discardPile,tradeArea);
+
 	Player* current;
 	while (!deck->empty())
 	{
@@ -60,13 +67,14 @@ int main()
 		//afficher la table pour le joueur
 		cout << table;
 		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
-		while (tradeArea->numCards() > 0 && query("prendre des cartes places en echange?"))
+		while (tradeArea->numCards() > 0 && IOUtil::promptForInput<bool>("prendre des cartes places en echange?"))
 		{
 			//afficher les cartes de tradeArea
 			cout << tradeArea << endl;
 			try
 			{
-				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter a vos chaines:"))); 
+				string cardName = IOUtil::promptForInput<string>("Entrez le nom complet de la carte a ajouter a vos chaines: ");
+				current->play(tradeArea->trade(cardName)); 
 			}
 			catch (game_logic_exception e)
 			{
@@ -83,7 +91,7 @@ int main()
 			current->play();
 			cout << "Voici votre main a present: " << endl;
 			current->printHand(cout, false);
-		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));
+		} while (!(current->isHandEmpty()) && IOUtil::promptForInput<bool>("jouer une autre carte?"));
 
 		//se débarasser d'une carte arbitraire
 		cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;

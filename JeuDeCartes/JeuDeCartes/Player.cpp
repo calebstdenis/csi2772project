@@ -159,14 +159,7 @@ void Player::play(Card *c)
 		if (maxNumChain == 2)
 		{
 			b = false;
-			char ch;
-			do
-			{
-				cout << "Acheter une nouvelle chaine?" << endl << "o/n";
-				cin >> ch;
-			}
-			while (ch != 'o' && ch != 'n');
-			if (ch == 'o')
+			if (IOUtil::promptForInput<bool>("Acheter une nouvelle chaine?"))
 			{
 				try//retourner une valeur booléenne serait plus simple ici
 				{
@@ -183,10 +176,9 @@ void Player::play(Card *c)
 		if (b)
 		{
 			//vendre une chaine
-			cout << "choisir une chaine a vendre (l'index commence a 0) /n";
 			int num = 10;
 			while (num > maxNumChain)
-				cin >> num;
+				num = IOUtil::promptForInput<int>("choisir une chaine a vendre (l'index commence a 0)");
 			*this+=chain[num]->sell();
 		}
 	}
@@ -197,7 +189,7 @@ void Player::play(Card *c)
 		chainBase = new Chain<Quartz>();
 	else if (s == Hematite::name)
 		chainBase = new Chain<Hematite>();
-	else if (s == Quartz::name)
+	else if (s == Obsidian::name)
 		chainBase = new Chain<Obsidian>();
 	else if (s == Malachite::name)
 		chainBase = new Chain<Malachite>();
