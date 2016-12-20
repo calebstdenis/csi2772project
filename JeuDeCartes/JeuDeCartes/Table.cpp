@@ -37,7 +37,7 @@ void Table::print(std::ostream &out) const
 	out << *players[0] << endl;
 	out << *players[1] << endl;
 	out << *deck << endl;
-	//out << *discardPile << endl;
+	out << *discardPile << endl;
 	out << *tradeArea << endl;
 	out << currentPlayer << endl;
 }
@@ -71,7 +71,7 @@ Table::Table(std::istream& in, CardFactory * cf)
 {
 	players = { new Player(in, cf), new Player(in, cf) };
 	deck = constructSingleLineComponent<Deck>(in, cf);
-	//discardPile = constructSingleLineComponent<DiscardPile>(in, cf);
+	discardPile = constructSingleLineComponent<DiscardPile>(in, cf);
 	tradeArea = constructSingleLineComponent<TradeArea>(in, cf);
 	if (!in >> currentPlayer) {
 		throw corrupt_game_file_exception();
@@ -81,10 +81,20 @@ Table::Table(std::istream& in, CardFactory * cf)
 std::ostream & operator<<(ostream &out, const Table &table)
 {
 	out << endl;
-	out << "------" << endl;
+	out << "---------" << endl;
 	out << "TABLE" << endl;
-	out << "------" << endl;
-	out << "PLAYER 1:" << endl;
-
+	out << "---------" << endl;
+	for (int i = 0; i < table.players.size(); i++) {
+		out << "JOUEUR " << i;
+		if (table.currentPlayer == i) {
+			out << i << "(Ton Tour):";
+		}
+		out << endl;
+		out << *table.players[i] << endl;
+	}
+	out << "DISCARD PILE:" << endl;
+	out << *table.discardPile << endl;
+	out << endl << "TRADE AREA:" << endl;
+	out << *table.tradeArea << endl;
 	return out;
 }

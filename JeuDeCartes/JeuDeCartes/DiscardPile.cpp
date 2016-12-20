@@ -10,6 +10,10 @@ DiscardPile::DiscardPile(istream& is, CardFactory* cf)
 	}
 }
 
+size_t DiscardPile::size() const {
+	return pile.size();
+}
+
 Card* DiscardPile::top() const
 {
 	return pile.back();
@@ -27,8 +31,12 @@ DiscardPile& DiscardPile::operator+=(Card* c)
 }
 std::ostream& operator<< (std::ostream & os, const DiscardPile & discardPile)
 {
-	os << discardPile.pile.front()->getName()[0];
-	return os;
+	if (discardPile.size() == 0) {
+		return os;
+	}
+	else {
+		return os << discardPile.top()->getName()[0];
+	}
 }
 
 void DiscardPile::print(std::ostream & os)

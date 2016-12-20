@@ -11,7 +11,8 @@ public:
 	DiscardPile(std::istream&, CardFactory*);
 	DiscardPile& operator+=(Card*);
 	Card* pickUp();
-	Card* top()const;
+	Card* top() const;
+	size_t size() const;
 	void print(std::ostream&);
 	friend std::ostream& operator<<(std::ostream&, const DiscardPile&);
 };

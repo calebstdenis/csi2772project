@@ -5,6 +5,8 @@
 
 Deck::Deck() : vector<Card*>() {}
 
+Deck::Deck(const Deck& d) : vector<Card*>(d) {}
+
 Card* Deck::draw() {
 	Card* card = back();
 	pop_back();

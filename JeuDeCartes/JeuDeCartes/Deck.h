@@ -12,6 +12,7 @@ class Deck : protected std::vector<Card*> {
 	
 public: 
 	Card* draw();
+	Deck(const Deck&);
 	Deck(std::istream&, CardFactory*);
 	friend std::ostream& operator<<(std::ostream&, const Deck&);
 	using vector<Card*>::size;
