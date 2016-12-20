@@ -162,7 +162,7 @@ void Player::play(Card *c)
 			char ch;
 			do
 			{
-				cout << "Acheter une nouvelle chaine?" << endl << "o/n";
+				cout << "Acheter une nouvelle chaine?" << endl << "o/n" << endl;
 				cin >> ch;
 			}
 			while (ch != 'o' && ch != 'n');
@@ -183,7 +183,7 @@ void Player::play(Card *c)
 		if (b)
 		{
 			//vendre une chaine
-			cout << "choisir une chaine a vendre (l'index commence a 0) /n";
+			cout << "choisir une chaine a vendre (l'index commence a 0)" << endl;
 			int num = 10;
 			while (num > maxNumChain)
 				cin >> num;
