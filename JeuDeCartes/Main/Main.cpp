@@ -25,7 +25,7 @@ std::string getString(char* text)
 int main()
 {
 	//singleton CardFactory
-	CardFactory* instance;
+	CardFactory* instance = CardFactory::getFactory();
 	//autres variables
 	Player* p1 = new Player(getString("nom de Joueur 1"));
 	Player* p2 = new Player(getString("nom de Joueur 2"));
