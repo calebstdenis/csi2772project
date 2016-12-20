@@ -71,7 +71,7 @@ int main()
 		//on dois avoir la main du joueur et faire main[i] et placer cette carte dans discardPile
 		int num;
 		cin >> num;
-		*discardPile += current->getHand()[num];//soit implémenter getHand ou créer une méthode qui passe i en paramètre et retourne Card*
+		*discardPile += current->removeIndex(num);
 
 		//placer les 3 premières carts de deck dans tradeArea et placer les cartes de DiscardPile qui matchent dessus
 		for (int i = 0; i<3; i++)

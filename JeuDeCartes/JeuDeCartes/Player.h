@@ -29,4 +29,5 @@ public:
 	//ajouté play pour jouer une carte
 	void play();
 	void play(Card*);
+	Card* removeIndex(int);
 };

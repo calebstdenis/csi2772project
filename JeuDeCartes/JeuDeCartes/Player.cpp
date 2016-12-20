@@ -134,13 +134,19 @@ void Player::draw(Card * c)
 }
 
 void Player::play() {
-
+	play(main.play());
 }
 
 void Player::play(Card *c)
 {
 
 }
+
+Card* Player::removeIndex(int index)
+{
+	return main[index];
+}
+
 
 
 
