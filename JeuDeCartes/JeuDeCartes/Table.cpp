@@ -32,9 +32,11 @@ bool Table::win(std::string& winner) const
 	return true;
 }
 
-void Table::clearTradeArea()
-{
-
+void Table::clearTradeArea() {
+	for (Card* c : tradeArea->cards) {
+		*discardPile += c;
+	}
+	tradeArea->cards.clear();
 }
 
 void Table::print(std::ostream &out) const
