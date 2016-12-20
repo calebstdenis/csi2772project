@@ -30,4 +30,5 @@ public:
 	void play();
 	void play(Card*);
 	Card* removeIndex(int);
+	bool isHandEmpty();
 };

@@ -47,3 +47,8 @@ std::ostream& operator<<(std::ostream& os, const Hand& hand)
 	}
 	return os;
 }
+
+bool Hand::isEmpty()
+{
+	return main.empty();
+}

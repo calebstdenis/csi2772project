@@ -16,4 +16,5 @@ public:
 	Card* operator[](int);
 	friend bool operator==(const Hand&, const Hand&); //for testing
 	friend std::ostream& operator<<(std::ostream&, const Hand&);
+	bool isEmpty();
 };

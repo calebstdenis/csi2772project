@@ -147,6 +147,11 @@ Card* Player::removeIndex(int index)
 	return main[index];
 }
 
+bool Player::isHandEmpty()
+{
+	return main.isEmpty();
+}
+
 
 
 

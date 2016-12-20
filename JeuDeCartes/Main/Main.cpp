@@ -85,7 +85,7 @@ int main()
 			current->play();
 			cout << "voici votre main a présent";
 			current->printHand(cout, false);
-		} while (query("jouer une autre carte?"));//ajouter la condition de la main du joueur qui est vide
+		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));//ajouter la condition de la main du joueur qui est vide avant query
 
 		//se débarasser d'une carte arbitraire
 		cout << "choisir une carte par son numéro (en commencant par 0 pour la première carte) pour s'en débarasser /n";
