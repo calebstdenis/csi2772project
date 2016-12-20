@@ -83,7 +83,7 @@ int main()
 		current = &table->currentTurn();
 
 		//afficher la table pour le joueur
-		cout << table;
+		cout << *table;
 		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
 		while (tradeArea->numCards() > 0 && IOUtil::promptForInput<bool>("prendre des cartes places en echange?"))
 		{
