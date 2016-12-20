@@ -66,14 +66,13 @@ int main()
 			cout << tradeArea;//pas sûr que c'est la bonne chose mais si ca affiche juste les cartes c'est bon
 			try
 			{
-				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter à vos chaînes:"))); //méthode a implémenter pour ajouter une carte dans une chaine
+				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter à vos chaînes:"))); 
 			}
 			catch (game_logic_exception e)
 			{
 				e.what();
 			}
 		}
-		//vider tradeArea
 		table.clearTradeArea();
 
 		do
@@ -81,16 +80,14 @@ int main()
 			//jouer la première carte de la main du joueur
 			cout << "placer la première carte /n";
 			current->printHand(cout, true);//imprimer la première carte
-			//jouer la carte
 			current->play();
 			cout << "voici votre main a présent";
 			current->printHand(cout, false);
-		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));//ajouter la condition de la main du joueur qui est vide avant query
+		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));
 
 		//se débarasser d'une carte arbitraire
 		cout << "choisir une carte par son numéro (en commencant par 0 pour la première carte) pour s'en débarasser /n";
 		current->printHand(cout, false);
-		//on dois avoir la main du joueur et faire main[i] et placer cette carte dans discardPile
 		int num;
 		cin >> num;
 		*discardPile += current->removeIndex(num);

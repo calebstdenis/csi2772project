@@ -139,7 +139,7 @@ void Player::play() {
 
 void Player::play(Card *c)
 {
-
+	
 }
 
 Card* Player::removeIndex(int index)
