@@ -161,10 +161,10 @@ void Player::play(Card *c)
 			char ch;
 			do
 			{
-				cout << "Acheter une nouvelle chaîne? /n o/n";
+				cout << "Acheter une nouvelle chaine?" << endl << "o/n";
 				cin >> ch;
 			}
-			while (ch != 'o' || ch != 'n');
+			while (ch != 'o' && ch != 'n');
 			if (ch == 'o')
 			{
 				try//retourner une valeur booléenne serait plus simple ici
@@ -182,7 +182,7 @@ void Player::play(Card *c)
 		if (b)
 		{
 			//vendre une chaine
-			cout << "choisir une chaîne a vendre (l'index commence a 0) /n";
+			cout << "choisir une chaine a vendre (l'index commence a 0) /n";
 			int num = 10;
 			while (num > maxNumChain)
 				cin >> num;

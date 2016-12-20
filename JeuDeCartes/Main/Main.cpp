@@ -3,11 +3,11 @@
 
 bool query(char* text)
 {
-	cout << text << endl << "o/n";
+	cout << text << endl << "o/n" << endl;
 	char c;
 	do
 		cin >> c;
-	while (c == 'o' || c == 'n');
+	while (c != 'o' && c != 'n');
 	if (c == 'o')
 		return true;
 	return false;
@@ -33,7 +33,7 @@ int main()
 	DiscardPile* discardPile = new DiscardPile();
 	TradeArea* tradeArea = new TradeArea();
 	bool début = true;
-	if (query("charger la partie sauvegardée?"))
+	if (query("charger la partie sauvegardee?"))
 	{
 		p1 = new Player(cin, instance);
 		p2 = new Player(cin, instance);
@@ -60,13 +60,13 @@ int main()
 		//afficher la table pour le joueur
 		cout << table;
 		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
-		while (query("ajouter des cartes placés en échange?") && tradeArea->numCards() > 0)
+		while (query("ajouter des cartes places en echange?") && tradeArea->numCards() > 0)
 		{
 			//afficher les cartes de tradeArea
 			cout << tradeArea;//pas sûr que c'est la bonne chose mais si ca affiche juste les cartes c'est bon
 			try
 			{
-				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter à vos chaînes:"))); 
+				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter a vos chaines:"))); 
 			}
 			catch (game_logic_exception e)
 			{
@@ -78,15 +78,15 @@ int main()
 		do
 		{
 			//jouer la première carte de la main du joueur
-			cout << "placer la première carte /n";
+			cout << "placer la première carte" << endl;
 			current->printHand(cout, true);//imprimer la première carte
 			current->play();
-			cout << "voici votre main a présent";
+			cout << "voici votre main a present" << endl;
 			current->printHand(cout, false);
 		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));
 
 		//se débarasser d'une carte arbitraire
-		cout << "choisir une carte par son numéro (en commencant par 0 pour la première carte) pour s'en débarasser /n";
+		cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;
 		current->printHand(cout, false);
 		int num;
 		cin >> num;
