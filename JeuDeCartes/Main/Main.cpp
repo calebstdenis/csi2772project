@@ -111,8 +111,8 @@ int main()
 	else if (p1->getNumCoins() < p2->getNumCoins())
 		cout << "Victoire joueur 2" << endl;
 	else
-		cout << "égalitée" << endl;
-	cout << "appuyex entré pour terminer la partie";
+		cout << "egalitee" << endl;
+	cout << "appuyez entre pour terminer la partie";
 	cin >> début;//juste pour ne pas terminer tout de suite
 
     return 0;
