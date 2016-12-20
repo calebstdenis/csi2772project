@@ -23,7 +23,7 @@ Card* Hand::play()
 	return c;
 }
 
-Card* Hand::top()
+Card* Hand::top() const
 {
 	return main.front();
 }
@@ -31,15 +31,13 @@ Card* Hand::top()
 Card* Hand::operator[] (const int i)
 {
 	Card* c = main[i];
-	int size = main.size();//la taille vas changer lorsqu'on enleve l'indice donc on stoque la bone valeur dans un int temporaire
-	for (int j = 0; j < size; j++)
-	{
-		if (j == i)
-			main.pop_front();
-		else
-			main.push_back(play());
-	}
+	main.erase(main.begin() + i);
 	return c;
+}
+
+bool operator==(const Hand &h1, const Hand &h2)
+{
+	return std::equal(h1.main.cbegin(), h1.main.cend(), h2.main.cbegin(), h2.main.cend(), Card::areSameType);
 }
 
 std::ostream& operator<<(std::ostream& os, const Hand& hand)

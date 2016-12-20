@@ -14,7 +14,7 @@ TradeArea& TradeArea::operator+=(Card *c) {
 }
 
 bool TradeArea::legal(Card *c) const {
-	auto pos = find_if(cards.cbegin(), cards.cend(), [c](Card* cardInTradeArea) { return cardInTradeArea->isSameTypeAs(c); });
+	auto pos = find_if(cards.cbegin(), cards.cend(), [c](Card* cardInTradeArea) { return Card::areSameType(c, cardInTradeArea); });
 	return pos != cards.cend();
 }
 
@@ -29,7 +29,7 @@ Card* TradeArea::trade(string gemName) {
 }
 
 int TradeArea::numCards() {
-	return cards.size();
+	return (int)cards.size();
 }
 
 std::ostream & operator<<(ostream & out, const TradeArea &tradeArea) {

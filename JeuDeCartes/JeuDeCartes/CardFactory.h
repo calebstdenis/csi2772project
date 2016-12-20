@@ -29,7 +29,7 @@ public:
 
 	Card* loadCard(char); //Retrieves a card in the deck corresponding to the character - used to build from save file
 
-	void resetUnloadedCards(); //required for testing purposes
+	void resetUnloadedCards(); //required for testing purposes, to reset the state of the singleton factory
 
 	static constexpr int numCardsInDeck = 104;
 };

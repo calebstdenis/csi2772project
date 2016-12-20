@@ -12,7 +12,8 @@ public:
 	Hand(std::istream&, CardFactory*);
 	Hand& operator+=(Card*);
 	Card* play();
-	Card* top();
+	Card* top() const;
 	Card* operator[](int);
+	friend bool operator==(const Hand&, const Hand&); //for testing
 	friend std::ostream& operator<<(std::ostream&, const Hand&);
 };
