@@ -22,6 +22,13 @@ public:
 
 	void clearTradeArea(); //adds unwanted TradeArea cards to the Discard Pile
 
+	//Getters
+	Player* getPlayer1() const;
+	Player* getPlayer2() const;
+	Deck* getDeck() const;
+	DiscardPile* getDiscardPile() const;
+	TradeArea* getTradeArea() const;
+
 	void print(std::ostream&) const;
 	friend std::ostream& operator<<(ostream&, const Table&);
 

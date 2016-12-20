@@ -1,5 +1,7 @@
 #include "Table.h"
+#include "GameExceptions.h"
 #include <iostream>
+#include <fstream>
 
 bool query(char* text)
 {
@@ -27,53 +29,78 @@ int main()
 	//singleton CardFactory
 	CardFactory* instance = CardFactory::getFactory();
 	//autres variables
-	Player* p1 = new Player(getString("nom de Joueur 1"));
-	Player* p2 = new Player(getString("nom de Joueur 2"));
-	Deck* deck = new Deck(instance->getDeck());
-	DiscardPile* discardPile = new DiscardPile();
-	TradeArea* tradeArea = new TradeArea();
-	bool début = true;
-	if (query("charger la partie sauvegardee?"))
-	{
-		p1 = new Player(cin, instance);
-		p2 = new Player(cin, instance);
-		deck = new Deck(cin, instance);
-		discardPile = new DiscardPile(cin, instance);
-		tradeArea = new TradeArea(cin, instance);
-		début = false;
-	}
-	//créer table
-	Table table(p1,p2,deck,discardPile,tradeArea);
+	Player* p1, *p2;
+	Deck* deck;
+	DiscardPile* discardPile;
+	TradeArea* tradeArea; 
 
-	if (début)//piger 5 cartes au début de la partie
-	{ 
+	Table* table;
+
+	bool loadFromSave = IOUtil::promptForInput<bool>("Charger la partie sauvegardee?");
+
+	if (loadFromSave) {
+		try {
+			ifstream saveIn(IOUtil::SAVE_FILE);
+			table = new Table(saveIn, instance);
+		}
+		catch (corrupt_game_file_exception e) {
+			cout << "Le fichier de jeu est corrompu!" << endl;
+			IOUtil::promptForInput<char>("Appuyez Enter pour quitter.");
+			return 1;
+		}
+		p1 = table->getPlayer1();
+		p2 = table->getPlayer2();
+		deck = table->getDeck();
+		discardPile = table->getDiscardPile();
+		tradeArea = table->getTradeArea();
+	}
+	else {
+		string p1Name = IOUtil::promptForInput<string>("nom de Joueur 1");
+		string p2Name = IOUtil::promptForInput<string>("nom de Joueur 2");
+		p1 = new Player(p1Name);
+		p2 = new Player(p2Name);
+		deck = new Deck(instance->getDeck());
+		discardPile = new DiscardPile();
+		tradeArea = new TradeArea();
+
+		table = new Table(p1, p2, deck, discardPile, tradeArea);
+
 		for (int i = 0; i < 5; i++) {
 			p1->draw(deck->draw());
 			p2->draw(deck->draw());
 		}
 	}
+
 	Player* current;
-	while (!deck->empty())
+	string winner;
+	while (!table->win(winner))
 	{
-		current = &table.currentTurn();
+		if (IOUtil::promptForInput<bool>("Quitter et sauvegarder le jeu?")) {
+			ofstream save(IOUtil::SAVE_FILE);
+			table->print(save);
+			return 0;
+		}
+		current = &table->currentTurn();
 
 		//afficher la table pour le joueur
-		cout << table;
+		cout << *table;
 		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
-		while (tradeArea->numCards() > 0 && query("prendre des cartes places en echange?"))
+		while (tradeArea->numCards() > 0 && IOUtil::promptForInput<bool>("prendre des cartes places en echange?"))
 		{
 			//afficher les cartes de tradeArea
 			cout << tradeArea << endl;
 			try
 			{
-				current->play(tradeArea->trade(getString("Entrez le nom de la carte a ajouter a vos chaines:"))); 
+				string cardName = IOUtil::promptForInput<string>("Entrez le nom complet de la carte a ajouter a vos chaines: ");
+				current->play(tradeArea->trade(cardName)); 
 			}
 			catch (game_logic_exception e)
 			{
 				e.what();
+				return 1;
 			}
 		}
-		table.clearTradeArea();
+		table->clearTradeArea();
 
 		do
 		{
@@ -83,7 +110,7 @@ int main()
 			current->play();
 			cout << "Voici votre main a present: " << endl;
 			current->printHand(cout, false);
-		} while (!(current->isHandEmpty()) && query("jouer une autre carte?"));
+		} while (!(current->isHandEmpty()) && IOUtil::promptForInput<bool>("jouer une autre carte?"));
 
 		//se débarasser d'une carte arbitraire
 		cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;
@@ -103,17 +130,10 @@ int main()
 		for (int i = 0; i < 2 && !deck->empty(); i++) {
 			current->draw(deck->draw());
 		}
-		table.endTurn();
+		table->endTurn();
 	}
-	//fin du jeu
-	if (p1->getNumCoins() > p2->getNumCoins())
-		cout << "Victoire joueur 1" << endl;
-	else if (p1->getNumCoins() < p2->getNumCoins())
-		cout << "Victoire joueur 2" << endl;
-	else
-		cout << "egalitee" << endl;
-	cout << "appuyez entre pour terminer la partie";
-	cin >> début;//juste pour ne pas terminer tout de suite
+	cout << "Victoire " << winner << endl;
+	IOUtil::promptForInput<char>("Appuyez Enter pour terminer la partie.");
 
     return 0;
 }

@@ -47,10 +47,6 @@ namespace Tests
 			Assert::IsTrue(fourthTurnIsCaleb);
 		}
 
-		TEST_METHOD(SaveAndLoadTable) {
-
-		}
-
 		TEST_METHOD_CLEANUP(DeleteAndResetFactory) {
 			delete p1;
 			delete p2;
