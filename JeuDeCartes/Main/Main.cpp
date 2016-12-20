@@ -36,9 +36,7 @@ int main()
 		current = &table.currentTurn();
 
 		//afficher la table pour le joueur
-		cout << table;//je ne crois pas que ca affiche la bonne chose
-		//piger la première carte de deck
-		current->draw(deck->draw());
+		cout << table;
 		//ajoute des cartes de tradeArea à ses propres chaines avant de jouer
 		while (query("ajouter des cartes placés en échange?") && tradeArea->numCards() > 0)
 		{
@@ -54,7 +52,7 @@ int main()
 			}
 		}
 		//vider tradeArea
-		//méthode non implémenté pour faire cela
+		table.clearTradeArea();
 
 		do
 		{
@@ -71,7 +69,19 @@ int main()
 		cout << "choisir une carte par son numéro (en commencant par 0 pour la première carte) pour s'en débarasser /n";
 		current->printHand(cout, false);
 		//on dois avoir la main du joueur et faire main[i] et placer cette carte dans discardPile
-		*discardPile+=
+		int num;
+		cin >> num;
+		*discardPile += current->getHand()[num];//soit implémenter getHand ou créer une méthode qui passe i en paramètre et retourne Card*
+
+		//placer les 3 premières carts de deck dans tradeArea et placer les cartes de DiscardPile qui matchent dessus
+		for (int i = 0; i<3; i++)
+			*tradeArea += deck->draw();
+		while (tradeArea->legal(discardPile->top()))
+			*tradeArea += discardPile->pickUp();
+
+		//le joueur pige deux cartes
+		current->draw(deck->draw());
+		current->draw(deck->draw());
 
 		table.endTurn();
 	}
