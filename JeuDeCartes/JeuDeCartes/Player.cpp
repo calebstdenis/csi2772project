@@ -139,7 +139,79 @@ void Player::play() {
 
 void Player::play(Card *c)
 {
-	
+	for (int i = 0; i < getNumChains(); i++)//on essaye en premier d'ajouter la carte à une chaine existante
+	{
+		try
+		{
+			*chain[i] += c;
+			return;//si on se rend ici il n'y a pas d'erreurs et tout est correct
+		}
+		catch (IllegalTypeException e)
+		{
+			//ne rien faire ici
+		}
+	}
+	//s'il y a trop de chaines on en vend une ou achete une nouvelle si possible
+	if (getNumChains() == maxNumChain)
+	{
+		bool b = true;
+		if (maxNumChain == 2)
+		{
+			b = false;
+			char ch;
+			do
+			{
+				cout << "Acheter une nouvelle chaîne? /n o/n";
+				cin >> ch;
+			}
+			while (ch != 'o' || ch != 'n');
+			if (ch == 'o')
+			{
+				try//retourner une valeur booléenne serait plus simple ici
+				{
+					buyThirdChain();
+				}
+				catch (NotEnoughCoinsException e)
+				{
+					b = true;
+				}
+			}
+			else
+				b = true;
+		}
+		if (b)
+		{
+			//vendre une chaine
+			cout << "choisir une chaîne a vendre (l'index commence a 0) /n";
+			int num = 10;
+			while (num > maxNumChain)
+				cin >> num;
+			*this+=chain[num]->sell();
+		}
+	}
+	//créer nouvelle chaine
+	Chain_Base* chainBase;
+	std::string s = c->getName();
+	if (s == Quartz::name)
+		chainBase = new Chain<Quartz>();
+	else if (s == Hematite::name)
+		chainBase = new Chain<Hematite>();
+	else if (s == Quartz::name)
+		chainBase = new Chain<Obsidian>();
+	else if (s == Malachite::name)
+		chainBase = new Chain<Malachite>();
+	else if (s == Turquoise::name)
+		chainBase = new Chain<Turquoise>();
+	else if (s == Ruby::name)
+		chainBase = new Chain<Ruby>();
+	else if (s == Amethyst::name)
+		chainBase = new Chain<Amethyst>();
+	else if (s == Emerald::name)
+		chainBase = new Chain<Emerald>();
+	else
+		throw corrupt_game_file_exception();
+	*chainBase += c;
+	chain.push_back(chainBase);//ajouter une nouvelle chaine
 }
 
 Card* Player::removeIndex(int index)

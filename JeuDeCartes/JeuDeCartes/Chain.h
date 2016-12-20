@@ -17,6 +17,7 @@ Commentaires au correcteur:
 */
 
 class Chain_Base {
+public:
 	virtual size_t size() const = 0;
 	virtual int sell() const = 0;
 	virtual Chain_Base& operator+=(Card*) = 0;
@@ -31,7 +32,7 @@ public:
 	Chain(std::istream&, CardFactory*);
 	size_t size() const override final;
 	int sell() const override final;
-	Chain<T>& operator+=(Card*) override final;
+	Chain_Base& operator+=(Card*) override final;
 	void print(ostream&) const override final;
 };
 
@@ -65,7 +66,7 @@ size_t Chain<T>::size() const {
 }
 
 template <class T>
-Chain<T>& Chain<T>::operator+= (Card* c) {
+Chain_Base& Chain<T>::operator+= (Card* c) {
 	if (c->getName() == T::name)
 	{
 		elements.push_back((T*)c);
