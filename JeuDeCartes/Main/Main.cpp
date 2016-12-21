@@ -99,8 +99,15 @@ int main()
 			cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;
 			current->printHand(cout, false);
 
-			int num;
-			cin >> num;
+			int num = 100;
+			while (num >= current->handLength() || num <= 0)
+			{
+				if (!(cin >> num))//si ca retourne false c'est un mauvais type de input
+				{
+					cin.clear(); //clear bad input flag
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+				}
+			}
 			*discardPile += current->removeIndex(num);
 		}
 

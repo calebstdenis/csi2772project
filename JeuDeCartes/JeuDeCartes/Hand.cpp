@@ -52,3 +52,8 @@ bool Hand::isEmpty()
 {
 	return main.empty();
 }
+
+int Hand::getLength()
+{
+	return main.size();
+}

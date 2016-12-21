@@ -32,4 +32,5 @@ public:
 	Card* removeIndex(int);
 	bool isHandEmpty();
 	friend bool operator==(const Player&, const Player&); //for testing purposes
+	int handLength();
 };
