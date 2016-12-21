@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "GameExceptions.h"
+#include <algorithm>
+#include <iterator>
 
 Player::Player(std::string& nom)
 {
@@ -112,7 +114,7 @@ std::ostream& operator<<(std::ostream& os, const Player & player)
 	os << player.nom << std::setw(IOUtil::COLUMN_WIDTH) << player.numCoins << " Coins" << endl;
 	for (Chain_Base* c : player.chain)
 	{
-		os << *c;
+		os << *c << endl;
 	}
 	return os;
 }
@@ -178,9 +180,10 @@ void Player::play(Card *c)
 			//vendre une chaine
 			int num = 10;
 			cout << "choisir une chaine a vendre (l'index commence a 0)" << endl;
-			while (num > maxNumChain)//ca c'est la bonne chose tu l'as changé en un erreur
+			while (num > maxNumChain)
 				cin >> num;
 			*this+=chain[num]->sell();
+			chain.erase(chain.begin() + num);
 		}
 	}
 	//créer nouvelle chaine

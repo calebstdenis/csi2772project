@@ -33,7 +33,7 @@ const int Malachite::cardsPerCoin[4] = { 3, 5, 6, 7 };
 const int Turquoise::cardsPerCoin[4] = { 2, 4, 6, 7 };
 const int Ruby::cardsPerCoin[4] = { 2, 4, 5, 6 };
 const int Amethyst::cardsPerCoin[4] = { 2, 3, 4, 5 };
-const int Emerald::cardsPerCoin[4] = { NULL, 2, 3, INT_MAX };
+const int Emerald::cardsPerCoin[4] = { INT_MAX, 2, 3, INT_MAX };
 
 string Quartz::getName() const { return name; }
 string Hematite::getName() const { return name; }
@@ -82,12 +82,7 @@ int Amethyst::getCardsPerCoin(int numCoins) const {
 }
 
 int Emerald::getCardsPerCoin(int numCoins) const {
-	int val = ::getCardsPerCoin(numCoins, cardsPerCoin);
-	if (val == NULL) {
-		string msg = "An emerald chain sells for more than " + to_string(numCoins) + " coins.";
-		throw invalid_argument(msg);
-	}
-	return val;
+	return ::getCardsPerCoin(numCoins, cardsPerCoin);
 }
 
 

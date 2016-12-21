@@ -88,7 +88,7 @@ int main()
 		while (tradeArea->numCards() > 0 && IOUtil::promptForInput<bool>("prendre des cartes places en echange?"))
 		{
 			//afficher les cartes de tradeArea
-			cout << tradeArea << endl;
+			cout << *tradeArea << endl;
 			//afficher les piles du joueur
 			cout << *current << endl;
 			try
