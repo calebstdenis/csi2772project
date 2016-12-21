@@ -100,7 +100,7 @@ int main()
 			current->printHand(cout, false);
 
 			int num = 100;
-			while (num >= current->handLength() || num <= 0)
+			while (num >= current->handLength() || num < 0)
 			{
 				if (!(cin >> num))//si ca retourne false c'est un mauvais type de input
 				{
