@@ -5,6 +5,10 @@
 
 namespace IOUtil {
 
+	void ignoreLine(std::istream& in) {
+		in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+
 	//Bool: Specilalisation impliquant un char pour oui ou non.
 	template <> bool promptForInput(std::string msg) {
 		char res;

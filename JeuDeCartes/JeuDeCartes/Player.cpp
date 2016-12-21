@@ -2,6 +2,7 @@
 #include "GameExceptions.h"
 #include <algorithm>
 #include <iterator>
+#include "IOUtil.h"
 
 Player::Player(std::string& nom)
 {
@@ -12,34 +13,54 @@ Player::Player(std::string& nom)
 
 Player::Player(std::istream & is, CardFactory* cf)
 {
+	int numChains; 
+
 	if (!(is >> nom))
 		throw corrupt_game_file_exception();
 	if (!(is >> numCoins))
 		throw corrupt_game_file_exception();
 	if (!(is >> maxNumChain))
 		throw corrupt_game_file_exception();
-	main = *new Hand(is,cf);
+	if (!(is >> numChains))
+		throw corrupt_game_file_exception();
 
+
+	IOUtil::ignoreLine(is);
+
+	//Get hand line
+	string line;
+	stringstream lineStream;
+	std::getline(is, line);
+	lineStream = stringstream(line);
+
+	main = *new Hand(lineStream,cf);
+
+	//Get chains line by line, if any
 	Chain_Base* c;
-	std::string s;
-	while (is >> s)
-	{
+	string s;
+	for (int i = 0; i < numChains; i++) {
+		getline(is, line);
+		lineStream = stringstream(line);
+		
+		if (!(lineStream >> s))
+			throw corrupt_game_file_exception();
+
 		if (s == Quartz::name)
-			c = new Chain<Quartz>(is, cf);
+			c = new Chain<Quartz>(lineStream, cf);
 		else if (s == Hematite::name)
-			c = new Chain<Hematite>(is, cf);
-		else if (s == Quartz::name)
-			c = new Chain<Obsidian>(is, cf);
+			c = new Chain<Hematite>(lineStream, cf);
+		else if (s == Obsidian::name)
+			c = new Chain<Obsidian>(lineStream, cf);
 		else if (s == Malachite::name)
-			c = new Chain<Malachite>(is, cf);
+			c = new Chain<Malachite>(lineStream, cf);
 		else if (s == Turquoise::name)
-			c = new Chain<Turquoise>(is, cf);
+			c = new Chain<Turquoise>(lineStream, cf);
 		else if (s == Ruby::name)
-			c = new Chain<Ruby>(is, cf);
+			c = new Chain<Ruby>(lineStream, cf);
 		else if (s == Amethyst::name)
-			c = new Chain<Amethyst>(is, cf);
+			c = new Chain<Amethyst>(lineStream, cf);
 		else if (s == Emerald::name)
-			c = new Chain<Emerald>(is, cf);
+			c = new Chain<Emerald>(lineStream, cf);
 		else
 			throw corrupt_game_file_exception();
 		chain.push_back(c);
@@ -124,10 +145,11 @@ void Player::print(std::ostream& os)
 	os << nom << endl;
 	os << numCoins << endl;
 	os << maxNumChain << endl;
+	os << getNumChains() << endl;
 	os << main << endl;
 	for (Chain_Base* c : chain)
 	{
-		os << c << endl;
+		os << *c << endl;
 	}
 }
 
@@ -219,6 +241,15 @@ Card* Player::removeIndex(int index)
 bool Player::isHandEmpty()
 {
 	return main.isEmpty();
+}
+
+bool operator==(const Player &p1, const Player &p2) {
+	auto chainsSame = [](const Chain_Base *c1, const Chain_Base *c2) { return c1->size() == c2->size() && typeid(c1) == typeid(c2); };
+	return p1.nom == p2.nom
+		&& p1.numCoins == p2.numCoins
+		&& p1.maxNumChain == p2.maxNumChain
+		&& p1.main == p2.main
+		&& equal(p1.chain.cbegin(), p1.chain.cend(), p2.chain.cbegin(), p2.chain.cend(), chainsSame);
 }
 
 

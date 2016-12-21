@@ -12,9 +12,11 @@ namespace IOUtil {
 	template <class T> T promptForInput(std::string msg) {
 		std::cout << msg << std::endl;
 		T val = std::cin.get();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		ignoreLine(std::cin);
 		return val;
 	}
+
+	void ignoreLine(std::istream&);
 
 	//Bool: Specilalisation impliquant un char pour oui ou non.
 	template <> bool promptForInput(std::string msg);

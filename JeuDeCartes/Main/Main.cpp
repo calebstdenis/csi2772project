@@ -3,27 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-bool query(char* text)
-{
-	cout << text << endl << "o/n" << endl;
-	char c;
-	do
-		cin >> c;
-	while (c != 'o' && c != 'n');
-	if (c == 'o')
-		return true;
-	return false;
-}
-
-std::string getString(char* text)
-{
-	cout << text << endl;
-	std::string s;
-	cin >> s;
-	return s;
-}
-
-
 int main()
 {
 	//singleton CardFactory
@@ -99,7 +78,6 @@ int main()
 			catch (game_logic_exception e)
 			{
 				e.what();
-				//return 1;//ne retourne rien ici ca finit le jeu
 			}
 		}
 		table->clearTradeArea();
@@ -116,13 +94,15 @@ int main()
 			current->printHand(cout, false);
 		} while (!(current->isHandEmpty()) && IOUtil::promptForInput<bool>("jouer une autre carte?"));
 
-		//se débarasser d'une carte arbitraire
-		cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;
-		current->printHand(cout, false);
+		if (!current->isHandEmpty()) {
+			//se débarasser d'une carte arbitraire
+			cout << "choisir une carte par son numero (en commencant par 0 pour la première carte) pour s'en debarasser" << endl;
+			current->printHand(cout, false);
 
-		int num;
-		cin >> num;
-		*discardPile += current->removeIndex(num);
+			int num;
+			cin >> num;
+			*discardPile += current->removeIndex(num);
+		}
 
 		//placer les 3 premières carts de deck dans tradeArea et placer les cartes de DiscardPile qui matchent dessus
 		for (int i = 0; i<3 && !deck->empty(); i++)

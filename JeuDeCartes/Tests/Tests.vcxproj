@@ -158,6 +158,7 @@
     <ClCompile Include="CardTest.cpp" />
     <ClCompile Include="ChainTest.cpp" />
     <ClCompile Include="HandTest.cpp" />
+    <ClCompile Include="PlayerTest.cpp" />
     <ClCompile Include="TableTest.cpp" />
     <ClCompile Include="TradeAreaTest.cpp" />
   </ItemGroup>

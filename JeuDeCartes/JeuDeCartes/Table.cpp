@@ -82,14 +82,7 @@ template <class T> T* constructSingleLineComponent(std::istream& in, CardFactory
 		throw corrupt_game_file_exception();
 	}
 
-	T *result = new T(lineStream, cf);
-
-	//Input failed before reaching the end of the line
-	if (!in.eof()) {
-		throw corrupt_game_file_exception();
-	}
-
-	return result;
+	return new T(lineStream, cf);
 }
 
 /*
