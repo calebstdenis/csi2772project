@@ -213,3 +213,4 @@ ModelManifest.xml
 /JeuDeCartes/JeuDeCartes.VC.db
 /JeuDeCartes/JeuDeCartes.VC.VC.opendb
 *.opendb
+/JeuDeCartes/Main/save
