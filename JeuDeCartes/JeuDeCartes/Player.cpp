@@ -202,7 +202,7 @@ void Player::play(Card *c)
 			//vendre une chaine
 			int num = 10;
 			cout << "choisir une chaine a vendre (l'index commence a 0)" << endl;
-			while (num > maxNumChain  || num <= 0)
+			while (num > maxNumChain  || num < 0)
 			{
 				if (!(cin >> num))//si ca retourne false c'est un mauvais type de input
 				{
