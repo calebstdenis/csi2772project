@@ -202,8 +202,14 @@ void Player::play(Card *c)
 			//vendre une chaine
 			int num = 10;
 			cout << "choisir une chaine a vendre (l'index commence a 0)" << endl;
-			while (num > maxNumChain)
-				cin >> num;
+			while (num > maxNumChain  || num <= 0)
+			{
+				if (!(cin >> num))//si ca retourne false c'est un mauvais type de input
+				{
+					cin.clear(); //clear bad input flag
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+				}
+			}
 			*this+=chain[num]->sell();
 			chain.erase(chain.begin() + num);
 		}
@@ -250,6 +256,11 @@ bool operator==(const Player &p1, const Player &p2) {
 		&& p1.maxNumChain == p2.maxNumChain
 		&& p1.main == p2.main
 		&& equal(p1.chain.cbegin(), p1.chain.cend(), p2.chain.cbegin(), p2.chain.cend(), chainsSame);
+}
+
+int Player::handLength()
+{
+	return main.getLength();
 }
 
 
