@@ -12,6 +12,12 @@ namespace IOUtil {
 	template <class T> T promptForInput(std::string msg) {
 		std::cout << msg << std::endl;
 		T val = std::cin.get();
+
+		//Bug fix
+		if (val == '\n') {
+			std::cin >> val;
+		}
+
 		ignoreLine(std::cin);
 		return val;
 	}
